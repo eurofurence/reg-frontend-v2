@@ -5,8 +5,9 @@ Welcome to your new TanStack app!
 To run this application:
 
 ```bash
-npm install
-npm run start
+npm i -g pnpm
+pnpm install
+pnpm run start
 ```
 
 # Building For Production
@@ -14,7 +15,7 @@ npm run start
 To build this application for production:
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 ## Testing
@@ -22,7 +23,7 @@ npm run build
 This project uses [Vitest](https://vitest.dev/) for testing. You can run the tests with:
 
 ```bash
-npm run test
+pnpm run test
 ```
 
 ## Styling
@@ -277,10 +278,6 @@ We use the `Derived` class to create a new store that is derived from another st
 Once we've created the derived store we can use it in the `App` component just like we would any other store using the `useStore` hook.
 
 You can find out everything you need to know on how to use TanStack Store in the [TanStack Store documentation](https://tanstack.com/store/latest).
-
-# Demo files
-
-Files prefixed with `demo` can be safely deleted. They are there to provide a starting point for you to play around with the features you've installed.
 
 # Learn More
 
