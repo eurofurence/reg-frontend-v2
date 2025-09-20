@@ -1,0 +1,47 @@
+{
+  "name": "reg-frontend",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 3000",
+    "start": "vite --port 3000",
+    "build": "vite build && tsc",
+    "serve": "vite preview",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.13",
+    "@tanstack/query-db-collection": "^0.2.17",
+    "@tanstack/react-db": "^0.1.18",
+    "@tanstack/react-devtools": "^0.2.2",
+    "@tanstack/react-query": "^5.89.0",
+    "@tanstack/react-router": "^1.131.44",
+    "@tanstack/react-router-devtools": "^1.131.44",
+    "@tanstack/router-plugin": "^1.131.44",
+    "classnames": "^2.5.1",
+    "date-fns": "^4.1.0",
+    "gt-react": "^10.5.1",
+    "luxon": "^3.7.2",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-hook-form": "^7.62.0",
+    "react-markdown": "^10.1.0",
+    "tailwindcss": "^4.1.13",
+    "ts-essentials": "^10.1.1"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/react": "^16.3.0",
+    "@types/luxon": "^3.7.1",
+    "@types/node": "^24.5.0",
+    "@types/react": "^19.1.13",
+    "@types/react-dom": "^19.1.9",
+    "@vitejs/plugin-react": "^4.7.0",
+    "jsdom": "^26.1.0",
+    "typescript": "^5.9.2",
+    "vite": "^6.3.6",
+    "vitest": "^3.2.4",
+    "web-vitals": "^4.2.4"
+  },
+  "packageManager": "pnpm@10.12.4"
+}
