@@ -6,6 +6,7 @@ interface ImportMetaEnv {
   readonly VITE_ATTSRV_BASE_URL?: string
   readonly VITE_PAYSRV_BASE_URL?: string
   readonly VITE_ROOMSRV_BASE_URL?: string
+  readonly VITE_SENTRY_DSN?: string
 }
 
 interface ImportMeta {

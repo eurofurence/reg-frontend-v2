@@ -12,7 +12,7 @@ import { routeTree } from './routeTree.gen'
 import './stylesheets/styles.css'
 
 Sentry.init({
-  dsn: 'https://e8e1229e279c2f657ed851843d8f551e@sentry.eurofurence.org/10',
+  dsn: import.meta.env.VITE_SENTRY_DSN,
   // Setting this option to true will send default PII data to Sentry.
   // For example, automatic IP address collection on events
   sendDefaultPii: true,
