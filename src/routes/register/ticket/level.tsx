@@ -200,10 +200,10 @@ function RouteComponent() {
     if (!isLoading) {
       if (!registrationInfo?.ticketType) {
         // No ticket type selected, go to type selection
-        navigate({ to: '/register/ticket/type' })
+        navigate({ to: '/register/ticket/type' as any })
       } else if (registrationInfo.ticketType.type === 'day' && !registrationInfo.ticketType.day) {
         // Day ticket but no day selected, go to day selection
-        navigate({ to: '/register/ticket/day' })
+        navigate({ to: '/register/ticket/day' as any })
       }
       // If ticketType is 'full' or ('day' with day selected), stay on level page
     }

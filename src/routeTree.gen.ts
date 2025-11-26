@@ -10,17 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as RegisterIndexRouteImport } from './routes/register/index'
-import { Route as RegisterTicketRouteImport } from './routes/register/ticket'
-import { Route as RegisterThankYouRouteImport } from './routes/register/thank-you'
-import { Route as RegisterSummaryRouteImport } from './routes/register/summary'
-import { Route as RegisterPersonalInfoRouteImport } from './routes/register/personal-info'
-import { Route as RegisterOptionalRouteImport } from './routes/register/optional'
-import { Route as RegisterNotOpenYetRouteImport } from './routes/register/not-open-yet'
 import { Route as RegisterContactRouteImport } from './routes/register/contact'
-import { Route as RegisterTicketTypeRouteImport } from './routes/register/ticket/type'
-import { Route as RegisterTicketLevelRouteImport } from './routes/register/ticket/level'
+import { Route as RegisterIndexRouteImport } from './routes/register/index'
+import { Route as RegisterNotOpenYetRouteImport } from './routes/register/not-open-yet'
+import { Route as RegisterOptionalRouteImport } from './routes/register/optional'
+import { Route as RegisterPersonalInfoRouteImport } from './routes/register/personal-info'
+import { Route as RegisterSummaryRouteImport } from './routes/register/summary'
+import { Route as RegisterThankYouRouteImport } from './routes/register/thank-you'
+import { Route as RegisterTicketRouteImport } from './routes/register/ticket'
 import { Route as RegisterTicketDayRouteImport } from './routes/register/ticket/day'
+import { Route as RegisterTicketLevelRouteImport } from './routes/register/ticket/level'
+import { Route as RegisterTicketTypeRouteImport } from './routes/register/ticket/type'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',

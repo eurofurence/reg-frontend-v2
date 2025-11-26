@@ -134,7 +134,7 @@ function RouteComponent() {
         day: DateTime.fromISO(formData.day, { zone: 'Europe/Berlin' }),
       },
     }))
-    navigate({ to: '/register/ticket/level' })
+    navigate({ to: '/register/ticket/level' as any })
   }
 
   const handleNext = handleSubmit(onSubmit)

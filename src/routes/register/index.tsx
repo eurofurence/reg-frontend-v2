@@ -18,7 +18,7 @@ function RouteComponent() {
     }
 
     if (data?.isOpen === false) {
-      navigate({ to: '/register/not-open-yet' })
+      navigate({ to: '/register/not-open-yet' as any })
       return
     }
 
@@ -28,11 +28,11 @@ function RouteComponent() {
       'id' in data.registration &&
       typeof data.registration.id === 'number'
     ) {
-      navigate({ to: '/register/summary' })
+      navigate({ to: '/register/summary' as any })
       return
     }
 
-    navigate({ to: '/register/ticket/type' })
+    navigate({ to: '/register/ticket/type' as any })
   }, [data, isLoading, navigate])
 
   return <div>{t('common-loading')}</div>
