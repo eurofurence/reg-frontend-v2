@@ -41,7 +41,6 @@ interface Countdown {
 }
 
 const useCountdown = (deadline?: DateTime) => {
-  deadline = DateTime.fromISO('2026-01-15T20:00:00+00:00')
   const calculate = () => {
     if (!deadline) {
       return null

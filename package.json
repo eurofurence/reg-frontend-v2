@@ -54,7 +54,11 @@
     "dev": "vite",
     "serve": "vite preview",
     "start": "vite",
-    "test": "bun test"
+    "test": "bun test",
+    "docker:build": "docker build -t eurofurence-reg-frontend .",
+    "docker:run": "docker run -p 8080:80 eurofurence-reg-frontend",
+    "docker:up": "docker-compose up --build",
+    "docker:down": "docker-compose down"
   },
   "type": "module"
 }
