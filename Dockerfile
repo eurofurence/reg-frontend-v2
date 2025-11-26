@@ -26,9 +26,8 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 COPY docker/nginx.conf /etc/nginx/conf.d/default.conf.template
 RUN envsubst '${NGINX_CONF_SERVER_NAME} ${NGINX_CONF_PATH_PREFIX}' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf
 
-# Create nginx user and change ownership of nginx directories
-RUN addgroup -g 101 -S nginx && \
-    adduser -S -D -H -u 101 -h /var/cache/nginx -s /sbin/nologin -G nginx -g nginx nginx && \
+# Ensure nginx user owns required directories (nginx user already exists in nginx:alpine)
+RUN mkdir -p /var/cache/nginx/proxy && \
     chown -R nginx:nginx /usr/share/nginx/html && \
     chown -R nginx:nginx /var/cache/nginx && \
     chown -R nginx:nginx /var/log/nginx && \
