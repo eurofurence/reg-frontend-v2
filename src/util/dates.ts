@@ -1,13 +1,13 @@
-import type { ReadonlyDateTime, ReadonlyInterval } from "./readonly-types";
+import type { DateTime, Interval } from 'luxon'
 
-export const eachDayOfInterval = (interval: ReadonlyInterval) => {
-  if (!interval.start || !interval.end) return [];
+export const eachDayOfInterval = (interval: Interval): DateTime[] => {
+  if (!interval.start || !interval.end) return []
 
-  const days: ReadonlyDateTime[] = [];
-  let cursor = interval.start;
+  const days: DateTime[] = []
+  let cursor = interval.start
   while (cursor <= interval.end!) {
-    days.push(cursor);
-    cursor = cursor.plus({ days: 1 });
+    days.push(cursor)
+    cursor = cursor.plus({ days: 1 })
   }
-  return days;
-};
+  return days
+}

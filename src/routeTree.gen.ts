@@ -12,8 +12,12 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RegisterIndexRouteImport } from './routes/register/index'
 import { Route as RegisterTicketRouteImport } from './routes/register/ticket'
+import { Route as RegisterThankYouRouteImport } from './routes/register/thank-you'
 import { Route as RegisterSummaryRouteImport } from './routes/register/summary'
 import { Route as RegisterPersonalInfoRouteImport } from './routes/register/personal-info'
+import { Route as RegisterOptionalRouteImport } from './routes/register/optional'
+import { Route as RegisterNotOpenYetRouteImport } from './routes/register/not-open-yet'
+import { Route as RegisterContactRouteImport } from './routes/register/contact'
 import { Route as RegisterTicketTypeRouteImport } from './routes/register/ticket/type'
 import { Route as RegisterTicketLevelRouteImport } from './routes/register/ticket/level'
 import { Route as RegisterTicketDayRouteImport } from './routes/register/ticket/day'
@@ -33,6 +37,11 @@ const RegisterTicketRoute = RegisterTicketRouteImport.update({
   path: '/register/ticket',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RegisterThankYouRoute = RegisterThankYouRouteImport.update({
+  id: '/register/thank-you',
+  path: '/register/thank-you',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RegisterSummaryRoute = RegisterSummaryRouteImport.update({
   id: '/register/summary',
   path: '/register/summary',
@@ -41,6 +50,21 @@ const RegisterSummaryRoute = RegisterSummaryRouteImport.update({
 const RegisterPersonalInfoRoute = RegisterPersonalInfoRouteImport.update({
   id: '/register/personal-info',
   path: '/register/personal-info',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegisterOptionalRoute = RegisterOptionalRouteImport.update({
+  id: '/register/optional',
+  path: '/register/optional',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegisterNotOpenYetRoute = RegisterNotOpenYetRouteImport.update({
+  id: '/register/not-open-yet',
+  path: '/register/not-open-yet',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegisterContactRoute = RegisterContactRouteImport.update({
+  id: '/register/contact',
+  path: '/register/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RegisterTicketTypeRoute = RegisterTicketTypeRouteImport.update({
@@ -61,8 +85,12 @@ const RegisterTicketDayRoute = RegisterTicketDayRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/register/contact': typeof RegisterContactRoute
+  '/register/not-open-yet': typeof RegisterNotOpenYetRoute
+  '/register/optional': typeof RegisterOptionalRoute
   '/register/personal-info': typeof RegisterPersonalInfoRoute
   '/register/summary': typeof RegisterSummaryRoute
+  '/register/thank-you': typeof RegisterThankYouRoute
   '/register/ticket': typeof RegisterTicketRouteWithChildren
   '/register': typeof RegisterIndexRoute
   '/register/ticket/day': typeof RegisterTicketDayRoute
@@ -71,8 +99,12 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/register/contact': typeof RegisterContactRoute
+  '/register/not-open-yet': typeof RegisterNotOpenYetRoute
+  '/register/optional': typeof RegisterOptionalRoute
   '/register/personal-info': typeof RegisterPersonalInfoRoute
   '/register/summary': typeof RegisterSummaryRoute
+  '/register/thank-you': typeof RegisterThankYouRoute
   '/register/ticket': typeof RegisterTicketRouteWithChildren
   '/register': typeof RegisterIndexRoute
   '/register/ticket/day': typeof RegisterTicketDayRoute
@@ -82,8 +114,12 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/register/contact': typeof RegisterContactRoute
+  '/register/not-open-yet': typeof RegisterNotOpenYetRoute
+  '/register/optional': typeof RegisterOptionalRoute
   '/register/personal-info': typeof RegisterPersonalInfoRoute
   '/register/summary': typeof RegisterSummaryRoute
+  '/register/thank-you': typeof RegisterThankYouRoute
   '/register/ticket': typeof RegisterTicketRouteWithChildren
   '/register/': typeof RegisterIndexRoute
   '/register/ticket/day': typeof RegisterTicketDayRoute
@@ -94,8 +130,12 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/register/contact'
+    | '/register/not-open-yet'
+    | '/register/optional'
     | '/register/personal-info'
     | '/register/summary'
+    | '/register/thank-you'
     | '/register/ticket'
     | '/register'
     | '/register/ticket/day'
@@ -104,8 +144,12 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/register/contact'
+    | '/register/not-open-yet'
+    | '/register/optional'
     | '/register/personal-info'
     | '/register/summary'
+    | '/register/thank-you'
     | '/register/ticket'
     | '/register'
     | '/register/ticket/day'
@@ -114,8 +158,12 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/register/contact'
+    | '/register/not-open-yet'
+    | '/register/optional'
     | '/register/personal-info'
     | '/register/summary'
+    | '/register/thank-you'
     | '/register/ticket'
     | '/register/'
     | '/register/ticket/day'
@@ -125,8 +173,12 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  RegisterContactRoute: typeof RegisterContactRoute
+  RegisterNotOpenYetRoute: typeof RegisterNotOpenYetRoute
+  RegisterOptionalRoute: typeof RegisterOptionalRoute
   RegisterPersonalInfoRoute: typeof RegisterPersonalInfoRoute
   RegisterSummaryRoute: typeof RegisterSummaryRoute
+  RegisterThankYouRoute: typeof RegisterThankYouRoute
   RegisterTicketRoute: typeof RegisterTicketRouteWithChildren
   RegisterIndexRoute: typeof RegisterIndexRoute
 }
@@ -154,6 +206,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RegisterTicketRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/register/thank-you': {
+      id: '/register/thank-you'
+      path: '/register/thank-you'
+      fullPath: '/register/thank-you'
+      preLoaderRoute: typeof RegisterThankYouRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/register/summary': {
       id: '/register/summary'
       path: '/register/summary'
@@ -166,6 +225,27 @@ declare module '@tanstack/react-router' {
       path: '/register/personal-info'
       fullPath: '/register/personal-info'
       preLoaderRoute: typeof RegisterPersonalInfoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/register/optional': {
+      id: '/register/optional'
+      path: '/register/optional'
+      fullPath: '/register/optional'
+      preLoaderRoute: typeof RegisterOptionalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/register/not-open-yet': {
+      id: '/register/not-open-yet'
+      path: '/register/not-open-yet'
+      fullPath: '/register/not-open-yet'
+      preLoaderRoute: typeof RegisterNotOpenYetRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/register/contact': {
+      id: '/register/contact'
+      path: '/register/contact'
+      fullPath: '/register/contact'
+      preLoaderRoute: typeof RegisterContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/register/ticket/type': {
@@ -210,8 +290,12 @@ const RegisterTicketRouteWithChildren = RegisterTicketRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  RegisterContactRoute: RegisterContactRoute,
+  RegisterNotOpenYetRoute: RegisterNotOpenYetRoute,
+  RegisterOptionalRoute: RegisterOptionalRoute,
   RegisterPersonalInfoRoute: RegisterPersonalInfoRoute,
   RegisterSummaryRoute: RegisterSummaryRoute,
+  RegisterThankYouRoute: RegisterThankYouRoute,
   RegisterTicketRoute: RegisterTicketRouteWithChildren,
   RegisterIndexRoute: RegisterIndexRoute,
 }

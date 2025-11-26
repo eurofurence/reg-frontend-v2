@@ -1,0 +1,953 @@
+{
+  "common-loading": "Loading...",
+  "header-menu-item-my-account": {
+    "value": "",
+    "label": "My account"
+  },
+  "header-menu-item-language": {
+    "value": "",
+    "label": "Language"
+  },
+  "header-clock-component-months": {
+    "value": "",
+    "caption": "Months"
+  },
+  "header-clock-component-days": {
+    "value": "",
+    "caption": "Days"
+  },
+  "header-clock-component-hours": {
+    "value": "",
+    "caption": "Hours"
+  },
+  "header-clock-component-minutes": {
+    "value": "",
+    "caption": "Minutes"
+  },
+  "header-clock-component-seconds": {
+    "value": "",
+    "caption": "Seconds"
+  },
+  "footer-links-privacy-policy": "Privacy",
+  "footer-links-legal-info": "Imprint",
+  "footer-links-policies": "Policies",
+  "footer-links-contact": "Contact",
+  "footer-last-saved": "Your information was last saved on {DATETIME($lastSaved, weekday: \"long\", month: \"long\", day: \"numeric\", year: \"numeric\")} at {DATETIME($lastSaved, hour: \"numeric\", minute: \"numeric\")}.",
+  "auth-unverified-title": "You have not verified your email address.",
+  "auth-unverified-message": "Please click the verification link in the email you received before registering!",
+  "auth-unverified-retry": "Retry",
+  "auth-login-required-title": "Please log in to continue.",
+  "auth-login-required-message": "You need to sign in with your Eurofurence account before registering.",
+  "auth-login-required-button": "Log in",
+  "invoice-edit-selection": "Edit selection",
+  "invoice-item-label": "{$amount} x {$name}",
+  "invoice-total-item-label": "{$name}",
+  "invoice-item-definition-register-ticket-type-day": {
+    "value": "",
+    "name": "Day Ticket",
+    "extra": "{DATETIME($day, month: \"long\", day: \"numeric\")}"
+  },
+  "invoice-item-definition-register-ticket-type-full": {
+    "value": "",
+    "name": "Full Convention",
+    "extra": "{DATETIME_RANGE($start, $end, month: \"long\", day: \"numeric\")}"
+  },
+  "invoice-item-definition-register-ticket-addons-stage-pass": {
+    "value": "",
+    "name": "Stage Pass"
+  },
+  "invoice-item-definition-register-ticket-addons-tshirt": {
+    "value": "",
+    "name": "T-shirt",
+    "extra": "{$size}"
+  },
+  "invoice-item-definition-register-ticket-addons-early": {
+    "value": "",
+    "name": "Early Bird"
+  },
+  "invoice-item-definition-register-ticket-addons-late": {
+    "value": "",
+    "name": "Late Fee"
+  },
+  "invoice-item-definition-register-ticket-addons-benefactor": {
+    "value": "",
+    "name": "Benefactor"
+  },
+  "invoice-item-definition-register-ticket-addons-fursuit": {
+    "value": "",
+    "name": "Fursuit Badge (free)"
+  },
+  "invoice-item-definition-register-ticket-addons-fursuitadd": {
+    "value": "",
+    "name": "Fursuit Badge (add.)"
+  },
+  "invoice-item-definition-register-ticket-addons-dealer-half": {
+    "value": "",
+    "name": "Dealers' Den (Half Table)"
+  },
+  "invoice-item-definition-register-ticket-addons-dealer-full": {
+    "value": "",
+    "name": "Dealers' Den (1 Table)"
+  },
+  "invoice-item-definition-register-ticket-addons-dealer-fullplus": {
+    "value": "",
+    "name": "Dealers' Den (1.5 Tables)"
+  },
+  "invoice-item-definition-register-ticket-addons-dealer-double": {
+    "value": "",
+    "name": "Dealers' Den (2 Tables)"
+  },
+  "invoice-item-definition-register-ticket-addons-dealer-quad": {
+    "value": "",
+    "name": "Dealers' Den (4 Tables)"
+  },
+  "invoice-item-definition-register-ticket-addons-boat-cruise": {
+    "value": "",
+    "name": "Boat Trip Sunday"
+  },
+  "invoice-item-definition-register-ticket-addons-boat-trip": {
+    "value": "",
+    "name": "Boat Trip Tuesday"
+  },
+  "invoice-item-definition-register-ticket-addons-boat-vip": {
+    "value": "",
+    "name": "Boat VIP"
+  },
+  "invoice-item-definition-register-ticket-addons-boat-benefactor": {
+    "value": "",
+    "name": "Boat Sponsor"
+  },
+  "invoice-item-definition-register-ticket-addons-artshow-table-half": {
+    "value": "",
+    "name": "Art Show (Half Table)"
+  },
+  "invoice-item-definition-register-ticket-addons-artshow-table-one": {
+    "value": "",
+    "name": "Art Show (1 Table)"
+  },
+  "invoice-item-definition-register-ticket-addons-artshow-table-oneandhalf": {
+    "value": "",
+    "name": "Art Show (1.5 Tables)"
+  },
+  "invoice-item-definition-register-ticket-addons-artshow-table-two": {
+    "value": "",
+    "name": "Art Show (2 Tables)"
+  },
+  "invoice-item-definition-register-ticket-addons-artshow-table-twoandhalf": {
+    "value": "",
+    "name": "Art Show (2.5 Tables)"
+  },
+  "invoice-item-definition-register-ticket-addons-artshow-table-three": {
+    "value": "",
+    "name": "Art Show (3 Tables)"
+  },
+  "invoice-item-definition-register-ticket-addons-artshow-table-threeandhalf": {
+    "value": "",
+    "name": "Art Show (3.5 Tables)"
+  },
+  "invoice-item-definition-register-ticket-addons-artshow-table-four": {
+    "value": "",
+    "name": "Art Show (4 Tables)"
+  },
+  "invoice-item-definition-register-ticket-addons-artshow-panel-half": {
+    "value": "",
+    "name": "Art Show (Half Panel)"
+  },
+  "invoice-item-definition-register-ticket-addons-artshow-panel-one": {
+    "value": "",
+    "name": "Art Show (1 Panel)"
+  },
+  "invoice-item-definition-register-ticket-addons-artshow-panel-oneandhalf": {
+    "value": "",
+    "name": "Art Show (1.5 Panels)"
+  },
+  "invoice-item-definition-register-ticket-addons-artshow-panel-two": {
+    "value": "",
+    "name": "Art Show (2 Panels)"
+  },
+  "invoice-item-definition-register-ticket-addons-artshow-panel-twoandhalf": {
+    "value": "",
+    "name": "Art Show (2.5 Panels)"
+  },
+  "invoice-item-definition-register-ticket-addons-artshow-panel-three": {
+    "value": "",
+    "name": "Art Show (3 Panels)"
+  },
+  "invoice-item-definition-register-ticket-addons-artshow-panel-threeandhalf": {
+    "value": "",
+    "name": "Art Show (3.5 Panels)"
+  },
+  "invoice-item-definition-register-ticket-addons-artshow-panel-four": {
+    "value": "",
+    "name": "Art Show (4 Panels)"
+  },
+  "invoice-item-definition-other": {
+    "value": "",
+    "name": "Other fees"
+  },
+  "invoice-total": {
+    "value": "",
+    "name": "Total",
+    "extra": "Taxes included"
+  },
+  "invoice-paid": {
+    "value": "",
+    "name": "Paid"
+  },
+  "invoice-due": {
+    "value": "",
+    "name": "Due"
+  },
+  "invoice-pay-button-credit-card": "💳 Pay with Debit-/Creditcard",
+  "invoice-pay-button-loading": "Loading...",
+  "invoice-unprocessed-payments": "Your payment is being processed",
+  "invoice-pay-button-sepa": "SEPA Transfer",
+  "register-header-title": "Welcome to Eurofurence 2026!",
+  "register-header-description": "We are very excited that you have decided to join us.\nGet ready for a fun couple of days with like-minded people and enjoy all the activities and events that we have lined up for you this year.",
+  "register-navigation-back": "Go back",
+  "register-navigation-next": "Continue",
+  "register-navigation-update": "Save",
+  "register-navigation-finish": "Finish",
+  "register-invoice-layout": {
+    "value": "",
+    "invoiceTitle": "Your Registration"
+  },
+  "register-step-counter": "Step {$step}",
+  "register-ticket-type-title": "Select your Ticket",
+  "register-ticket-type-day": {
+    "value": "",
+    "label": "Day Ticket"
+  },
+  "register-ticket-type-full": {
+    "value": "",
+    "label": "Full Convention"
+  },
+  "register-ticket-type-validation-errors-type-required": "Please select a ticket type!",
+  "register-ticket-day-title": "Select your Convention Day",
+  "register-ticket-day-card": {
+    "value": "",
+    "label": "{DATETIME($date, weekday: \"long\", day: \"numeric\", month: \"short\")}"
+  },
+  "register-ticket-day-validation-errors-day-required": "Please select a day!",
+  "register-ticket-level-title": "Select your Ticket",
+  "register-ticket-level-card-standard": {
+    "value": "This standard Convention ticket grants you access to the convention.\n+ Standard convention badge\n+ Program book\n+ Participation in scheduled events",
+    "label": "Standard",
+    "priceLabel": "{$type ->\n*[full] Standard Ticket\n[day]  Standard Day Ticket\n}"
+  },
+  "register-ticket-level-card-sponsor": {
+    "value": "As a thank you for supporting Eurofurence with a voluntary donation, you will receive\n+ Sponsor convention badge\n+ Program book + honorable mention\n+ Participation in scheduled events\n+ Early access to the Dealers' Den and Art Show (Thursday)\n+ Priority queueing for certain events\n+ Sponsor pack**\n+ Free T-shirt**",
+    "label": "Sponsor",
+    "priceLabel": "{$type ->\n*[full] Sponsor Ticket\n[day]  Sponsor Day Ticket\n}"
+  },
+  "register-ticket-level-card-super-sponsor": {
+    "value": "An even more generous donation, you have earned a Super Sponsor ticket! This means you will get\n+ Super Sponsor convention badge\n+ Program book + honorable mention\n+ Participation in scheduled events\n+ Super-early access to the Dealers' Den and Art Show (Thursday)\n+ Priority queueing for certain events\n+ Super Sponsor pack**\n+ Free T-shirt**",
+    "label": "Super sponsor",
+    "priceLabel": "{$type ->\n*[full] Super Sponsor Ticket\n[day]  Super Sponsor Day Ticket\n}"
+  },
+  "register-ticket-level-modifiers-early-bird": {
+    "value": "",
+    "label": "Early Bird Discount (if paid before March 15th)",
+    "price": "- €15"
+  },
+  "register-ticket-level-modifiers-late-fee": {
+    "value": "",
+    "label": "Late Fee (if paid June 15th or later)",
+    "price": "+ €15"
+  },
+  "register-ticket-level-footnote-late-sponsors": {
+    "value": "",
+    "label": "Subject to availability if booked less than 1 month before the convention!",
+    "price": "."
+  },
+  "register-ticket-level-expiration-notice": "Register before {DATETIME($expirationDate, day: \"numeric\", month: \"long\")}",
+  "register-ticket-level-addons-title": "Select Add-ons",
+  "register-ticket-level-addons-none-available": "No addons available for this ticket type",
+  "register-ticket-level-addons-item-stage-pass": {
+    "value": "",
+    "label": "Stage Pass",
+    "description": "The Stage Pass will grant you access to the stage events."
+  },
+  "register-ticket-level-addons-item-tshirt": {
+    "value": "",
+    "label": "Eurofurence T-shirt",
+    "description": "100% cotton, high-quality T-shirts. You can also purchase these at the event, but purchasing one at least one month before the convention will guarantee availability of your size."
+  },
+  "register-ticket-level-addons-item-tshirt-option-size": {
+    "value": "",
+    "label": "T-shirt size"
+  },
+  "register-ticket-level-addons-item-tshirt-option-size-value": "{ $value ->\n[XS]    X-Small (Regular Cut)\n[wXS]   X-Small (Ladies Cut)\n*[S]     Small (Regular Cut)\n[wS]    Small (Ladies Cut)\n[M]     Medium (Regular Cut)\n[wM]    Medium (Ladies Cut)\n[L]     Large (Regular Cut)\n[wL]    Large (Ladies Cut)\n[XL]    X-Large (Regular Cut)\n[wXL]   X-Large (Ladies Cut)\n[XXL]   XX-Large (Regular Cut)\n[wXXL]  XX-Large (Ladies Cut)\n[m3XL]  3X-Large (Regular Cut)\n[w3XL]  3X-Large (Ladies Cut)\n[m4XL]  4X-Large (Regular Cut)\n[w4XL]  4X-Large (Ladies Cut)",
+  "register-ticket-level-addons-item-benefactor": {
+    "value": "",
+    "label": "Benefactor",
+    "description": "Your voluntary extra contribution to make Eurofurence even more amazing. Being a Benefactor, you can directly support us and play a part in promoting diversity and quality of Eurofurence, realizing new ideas and projects, and making the event more inclusive, creative, and exciting."
+  },
+  "register-ticket-level-addons-item-benefactor-option-count": {
+    "value": "",
+    "label": "Count"
+  },
+  "register-ticket-level-addons-item-benefactor-option-count-value": "{ $value ->\n*[c1]   1x\n[c2]   2x\n[c3]   3x\n[c4]   4x\n[c5]   5x\n[c6]   6x\n[c8]   8x\n[c10]  10x\n[c15]  15x\n[c20]  20x\n[c30]  30x\n[c40]  40x\n[c50]  50x\n[c100]  100x",
+  "register-ticket-level-addons-item-fursuit": {
+    "value": "",
+    "label": "Free Fursuit Badge",
+    "description": "We will print a badge for your fursuit. You can wear it while in suit, but you will still need to carry your normal badge with you. The first one is free."
+  },
+  "register-ticket-level-addons-item-fursuitadd": {
+    "value": "",
+    "label": "Additional Fursuit Badges",
+    "description": "If you have more than one fursuit or would like additional fursuit badges, then pick this and choose how many you would like to purchase. You will be billed for them as part of your registration."
+  },
+  "register-ticket-level-addons-item-fursuitadd-option-count": {
+    "value": "",
+    "label": "Count"
+  },
+  "register-ticket-level-addons-item-fursuitadd-option-count-value": "{ $value ->\n*[c1]   1x\n[c2]   2x\n[c3]   3x\n[c4]   4x\n[c5]   5x\n[c6]   6x\n[c7]   7x\n[c8]   8x\n[c9]   9x\n[c10]  10x",
+  "register-ticket-level-validation-errors-level-required": "Please select a ticket level!",
+  "register-ticket-level-validation-errors-addons-tshirt-options-size-required": "Please select a T-shirt size!",
+  "register-ticket-level-validation-errors-addons-benefactor-options-count-required": "Please select how many times you would like to add this!",
+  "register-ticket-level-validation-errors-addons-fursuitadd-options-count-required": "Please select the number of additional Fursuit Badges!",
+  "register-personal-info-title": "Personal information",
+  "register-personal-info-nickname": {
+    "value": "",
+    "label": "Nickname",
+    "placeholder": "Johnny_The_Sergal"
+  },
+  "register-personal-info-first-name": {
+    "value": "",
+    "label": "First Name",
+    "placeholder": "John"
+  },
+  "register-personal-info-last-name": {
+    "value": "",
+    "label": "Last Name",
+    "placeholder": "Doe"
+  },
+  "register-personal-info-full-name-permission": {
+    "value": "",
+    "label": "I grant permission to use / publish my legal name in Eurofurence related media."
+  },
+  "register-personal-info-date-of-birth": {
+    "value": "",
+    "label": "Date of Birth",
+    "placeholder": "1995-06-30"
+  },
+  "register-personal-info-spoken-languages": {
+    "value": "",
+    "label": "Spoken Languages"
+  },
+  "register-personal-info-pronouns": {
+    "value": "",
+    "legend": "Pronouns"
+  },
+  "register-personal-info-pronouns-prefer-not-to-say": {
+    "value": "",
+    "label": "Prefer not to say"
+  },
+  "register-personal-info-pronouns-other": {
+    "value": "",
+    "label": "Other"
+  },
+  "register-personal-info-accessibility": {
+    "value": "",
+    "legend": "Accessibility"
+  },
+  "register-personal-info-accessibility-wheelchair": {
+    "value": "",
+    "label": "Please accommodate my wheelchair (and me)."
+  },
+  "register-personal-info-validation-errors-nickname-required": "Please provide a nickname!",
+  "register-personal-info-validation-errors-nickname-max-length": "Your nickname may be at most {$limit} characters long!",
+  "register-personal-info-validation-errors-nickname-validate-no-leading-or-trailing-whitespace": "Please avoid leading or trailing whitespace!",
+  "register-personal-info-validation-errors-nickname-validate-min-one-alphanumeric-char": "Your nickname must contain at least 1 letter or number!",
+  "register-personal-info-validation-errors-nickname-validate-max-two-non-alphanumeric-chars": "Your nickname may contain at most 2 special characters!",
+  "register-personal-info-validation-errors-first-name-required": "Please provide a first name!",
+  "register-personal-info-validation-errors-first-name-max-length": "Your first name may be at most {$limit} characters long!",
+  "register-personal-info-validation-errors-last-name-required": "Please provide a last name!",
+  "register-personal-info-validation-errors-last-name-max-length": "Your last name may be at most {$limit} characters long!",
+  "register-personal-info-validation-errors-date-of-birth-required": "Please provide your date of birth!",
+  "register-personal-info-validation-errors-date-of-birth-validate-minimum-age": "You must be at least 18 years old to attend Eurofurence!",
+  "register-personal-info-validation-errors-date-of-birth-validate-maximum-age": "122-year-olds are the oldest people allowed at Eurofurence for technical reasons!",
+  "register-personal-info-validation-errors-spoken-languages-required": "Please select your spoken languages!",
+  "register-personal-info-validation-errors-pronouns-selection-required": "Please select your pronouns!",
+  "register-personal-info-validation-errors-pronouns-other-required": "Provide an alternative set of pronouns!",
+  "register-personal-info-validation-errors-pronouns-other-max-length": "Your pronouns may be at most {$limit} characters long!",
+  "register-contact-info-title": "Contact Information",
+  "register-contact-info-email": {
+    "value": "",
+    "label": "Email Address",
+    "placeholder": "john.smith@example.com"
+  },
+  "register-contact-info-phone-number": {
+    "value": "",
+    "label": "Phone Number",
+    "placeholder": "+32 0 000 00 00"
+  },
+  "register-contact-info-telegram-username": {
+    "value": "",
+    "label": "Telegram Username",
+    "placeholder": "@johnnythesergal"
+  },
+  "register-contact-info-street": {
+    "value": "",
+    "label": "Street",
+    "placeholder": "Pennylane 40"
+  },
+  "register-contact-info-city": {
+    "value": "",
+    "label": "City",
+    "placeholder": "Zootopia"
+  },
+  "register-contact-info-postal-code": {
+    "value": "",
+    "label": "Postal Code (ZIP)",
+    "placeholder": "8888"
+  },
+  "register-contact-info-state-or-province": {
+    "value": "",
+    "label": "State / Province",
+    "placeholder": "Fur Valley"
+  },
+  "register-contact-info-country": {
+    "value": "",
+    "label": "Country",
+    "placeholder": "Germany"
+  },
+  "register-contact-info-validation-errors-email-required": "Please provide an email address!",
+  "register-contact-info-validation-errors-email-max-length": "Your email address may be at most {$limit} characters long!",
+  "register-contact-info-validation-errors-email-pattern": "Your email address must look like an email address!",
+  "register-contact-info-validation-errors-email-validate-is-verified": "You may only use either your login email address or an email address you previously registered with!",
+  "register-contact-info-validation-errors-phone-number-required": "Please provide a phone number!",
+  "register-contact-info-validation-errors-phone-number-max-length": "Your phone number may be at most {$limit} characters long!",
+  "register-contact-info-validation-errors-telegram-username-max-length": "Your telegram username may be at most {$limit} characters long!",
+  "register-contact-info-validation-errors-telegram-username-pattern": "Your telegram username must include the initial @ character!",
+  "register-contact-info-validation-errors-street-required": "Please provide a street!",
+  "register-contact-info-validation-errors-street-max-length": "Your street name may be at most {$limit} characters long!",
+  "register-contact-info-validation-errors-city-required": "Please provide a city!",
+  "register-contact-info-validation-errors-city-max-length": "Your city name may be at most {$limit} characters long!",
+  "register-contact-info-validation-errors-postal-code-required": "Please provide a postal code!",
+  "register-contact-info-validation-errors-postal-code-max-length": "Your postal code may be at most {$limit} characters long!",
+  "register-contact-info-validation-errors-state-or-province-max-length": "Your province name may be at most {$limit} characters long!",
+  "register-contact-info-validation-errors-country-required": "Please provide a country!",
+  "register-contact-info-validation-errors-country-max-length": "Your country name may be at most {$limit} characters long!",
+  "register-optional-info-title": "Optional Information",
+  "register-optional-info-notifications": {
+    "value": "",
+    "legend": "I would like to receive event information and announcements about"
+  },
+  "register-optional-info-notifications-art": {
+    "value": "",
+    "label": "Art"
+  },
+  "register-optional-info-notifications-animation": {
+    "value": "",
+    "label": "Animation"
+  },
+  "register-optional-info-notifications-music": {
+    "value": "",
+    "label": "Music"
+  },
+  "register-optional-info-notifications-fursuiting": {
+    "value": "",
+    "label": "Fursuiting"
+  },
+  "register-optional-info-conbook": {
+    "value": "",
+    "legend": "Conbook"
+  },
+  "register-optional-info-conbook-digital-only": {
+    "value": "",
+    "label": "I only want to receive a digital version of the convention booklet."
+  },
+  "register-optional-info-comments": {
+    "value": "",
+    "label": "Comments",
+    "placeholder": "I would like to know more about..."
+  },
+  "register-summary-title-initial": "Confirmation",
+  "register-summary-title-edit": "Your Registration",
+  "register-summary-registration-status-unsubmitted": "Please double check your information below and click \"Finish\" to submit it.",
+  "register-summary-registration-status-new": "We have received your registration and will confirm it when things are ready. Keep an eye on your mailbox!",
+  "register-summary-registration-status-approved": "Your registration has been approved, if you pay now, you will be all set!",
+  "register-summary-registration-status-partially-paid": "We have received partial payment, if you pay what is left, you will be all set!",
+  "register-summary-registration-status-paid": "We have received your payment. You are all set. See you at the convention!",
+  "register-summary-registration-status-checked-in": "What are you doing looking at the registration system? Go have fun at the convention!",
+  "register-summary-registration-status-cancelled": "Uh oh, your registration has been cancelled. You should have received an email explaining why. If you believe this is an error on our part, reply to that email.",
+  "register-summary-registration-status-waiting": "You are on the waiting list. Let us hope a place opens up for you!",
+  "register-summary-registration-id": "Badge Number: {$registrationId}",
+  "register-summary-no-draft-available": "No draft registration available.",
+  "register-summary-section-personal-title": "Personal Information",
+  "register-summary-section-contact-title": "Contact Information",
+  "register-summary-section-optional-title": "Optional Information",
+  "register-summary-edit": "Edit information",
+  "register-summary-section-personal-property-nickname-name": "Nickname",
+  "register-summary-section-personal-property-full-name-name": "Legal Name",
+  "register-summary-section-personal-property-pronouns-name": "Pronouns",
+  "register-summary-section-personal-property-date-of-birth-name": "Date of Birth",
+  "register-summary-section-personal-property-spoken-languages-name": "Spoken Language(s)",
+  "register-summary-section-personal-property-wheelchair-accomodation-name": "Wheelchair Accommodation",
+  "register-summary-section-contact-property-email-name": "E-mail Address",
+  "register-summary-section-contact-property-phone-number-name": "Phone Number",
+  "register-summary-section-contact-property-street-name": "Street",
+  "register-summary-section-contact-property-city-name": "City",
+  "register-summary-section-contact-property-postal-code-name": "Postal Code",
+  "register-summary-section-contact-property-state-or-province-name": "State / Province",
+  "register-summary-section-contact-property-country-name": "Country",
+  "register-summary-section-optional-property-notifications-name": "I would like to receive event information and announcements about",
+  "register-summary-section-optional-property-digital-conbook-name": "Digital Conbook only",
+  "register-summary-section-optional-property-comments-name": "Comments",
+  "register-summary-boolean-value-true": "Yes",
+  "register-summary-boolean-value-false": "No",
+  "register-summary-rules-and-conditions-accepted": "I accept the <rules>rules</rules> and <conditions>conditions</conditions>.",
+  "register-summary-validation-errors-rules-and-conditions-accepted-required": "You must accept the rules and conditions to register!",
+  "register-thank-you-title": "Thank you for your registration!",
+  "register-thank-you-subtitle": "Next Steps",
+  "register-thank-you-content": "We will review your registration and send you a response within a few days.\nYou will receive an update by email after we have processed and approved your registration.",
+  "register-not-open-yet-title": "Registration is not open yet!",
+  "register-not-open-yet-content": "We are not yet accepting registrations!\nCheck back here when registration opens!",
+  "hotel-booking-header-title": "Welcome to Eurofurence 2026!",
+  "hotel-booking-header-description": "In order to speed up hotel booking and increase your chances of securing a room, you can enter your preferred dates,\nhotel room, contact and guest information on the following pages. We will then generate an email template for you,\nwhich you can copy and paste into your email client.\nOnce booking starts, the secret code in the message below will be revealed.\n<span className=\"important\">You need this code for the hotel to accept your booking.</span>\nThe secret code will also be sent out on our [https://twitter.com/eurofurence](Twitter) and Telegram accounts.",
+  "hotel-booking-invoice-layout": {
+    "value": "",
+    "invoiceTitle": "Your Hotel Room"
+  },
+  "hotel-booking-room-title": "Room Types",
+  "hotel-booking-room-card-standard": {
+    "value": "The 27 sqm standard rooms offer luxurious living comfort.\nThe rooms are additionally equipped with modern furnishings and spacious working & storage areas so as to best meet your needs.",
+    "label": "Standard Room"
+  },
+  "hotel-booking-room-card-deluxe": {
+    "value": "The deluxe rooms at the Estrel Hotel feature an impressive 34 sqm of modern living space.\nThe contemporary furnishings and generous work spaces are specially designed to meet the needs of business travellers.",
+    "label": "Deluxe Room"
+  },
+  "hotel-booking-room-card-junior-suite": {
+    "value": "The spacious junior suites (49 to 55 sqm) offer separate living and sleeping areas and feature distinctive styles thanks\nto selected contemporary furnishings, colour accents and works of art.",
+    "label": "Junior Suite"
+  },
+  "hotel-booking-room-card-deluxe-suite": {
+    "value": "Elegantly liveable and fully equipped, the executive suites with their 90 sqm of living space leave nothing to be desired.\nA separate living area with sofas and armchairs, a small bar area and a second TV screen in the bathroom create an upscale,\nwelcoming atmosphere almost like home.",
+    "label": "Deluxe Suite"
+  },
+  "hotel-booking-room-card-price-scope": "Price per room per night",
+  "hotel-booking-room-card-breakfast-and-taxes-notice": "Breakfast and taxes included",
+  "hotel-booking-room-validation-errors-type-required": "Please select a room type!",
+  "hotel-booking-guests-title": "Guest Information",
+  "hotel-booking-guests-guest-title": "Guest {$guestNumber}",
+  "hotel-booking-guests-first-name": {
+    "value": "",
+    "label": "First Name",
+    "placeholder": "John"
+  },
+  "hotel-booking-guests-last-name": {
+    "value": "",
+    "label": "Last Name",
+    "placeholder": "Doe"
+  },
+  "hotel-booking-guests-email": {
+    "value": "",
+    "label": "Email Address",
+    "placeholder": "john.smith@email.com"
+  },
+  "hotel-booking-guests-phone-number": {
+    "value": "",
+    "label": "Phone Number",
+    "placeholder": "+32 0 000 00 00"
+  },
+  "hotel-booking-guests-street": {
+    "value": "",
+    "label": "Street",
+    "placeholder": "Pennylane 40"
+  },
+  "hotel-booking-guests-city": {
+    "value": "",
+    "label": "City",
+    "placeholder": "Zootopia"
+  },
+  "hotel-booking-guests-postal-code": {
+    "value": "",
+    "label": "Postal Code (ZIP)",
+    "placeholder": "8888"
+  },
+  "hotel-booking-guests-state-or-province": {
+    "value": "",
+    "label": "State / Province",
+    "placeholder": "Fur Valley"
+  },
+  "hotel-booking-guests-country": {
+    "value": "",
+    "label": "Country",
+    "placeholder": "Germany"
+  },
+  "hotel-booking-guests-validation-errors-guests-firstName-required": "Please provide a first name!",
+  "hotel-booking-guests-validation-errors-guests-lastName-required": "Please provide a last name!",
+  "hotel-booking-guests-validation-errors-guests-email-required": "Please provide an email address!",
+  "hotel-booking-guests-validation-errors-guests-phoneNumber-required": "Please provide a phone number!",
+  "hotel-booking-guests-validation-errors-guests-street-required": "Please provide a street!",
+  "hotel-booking-guests-validation-errors-guests-city-required": "Please provide a city!",
+  "hotel-booking-guests-validation-errors-guests-postalCode-required": "Please provide a postal code!",
+  "hotel-booking-guests-validation-errors-guests-stateOrProvince-required": "Please provide a state or province!",
+  "hotel-booking-guests-validation-errors-guests-country-required": "Please provide a country!",
+  "hotel-booking-additional-info-title": "Additional Information",
+  "hotel-booking-additional-info-comments": {
+    "value": "",
+    "label": "Comments",
+    "placeholder": "I would like to know more about..."
+  },
+  "hotel-booking-email-title": "Copy your generated email",
+  "hotel-booking-email-description": "Once booking starts, the secret code in the message below will be revealed. <span className=\"important\">You need this code for the hotel to accept your booking.</span>\nIf you want, you can already copy the text below in a draft message in your email client so you only need to enter the secret code once it has been revealed.\nThe secret code will also be sent out on our [https://twitter.com/eurofurence](Twitter) and Telegram accounts.",
+  "funnel-error-report-title": "Oh no...",
+  "funnel-error-report-operation": "{$operation ->\n[registration-open-check]       We are unable to check if you are already registered.\n[registration-submission]       We are unable to submit your registration.\n[registration-update]           We are unable to update your registration.\n[registration-initiate-payment] We are unable to initiate your payment.\n[registration-set-locale]       We are unable to save your language preference.\n[user-info-lookup]              We are unable to retrieve your login information.\n*[unknown]                       There was an error handling your request.",
+  "funnel-error-report-message": "{$category ->\n[attsrv] {$code ->\n[attendee-data-duplicate]  There is already an attendee registered with the information you supplied!\n[attendee-data-invalid]    The information you filled in was not accepted by the server. This should not happen under normal conditions. Please try again in a few minutes or contact support.\n[attendee-parse-error]     The server did not understand the information the website sent to it. This should not happen under normal conditions. Please try again in a few minutes or contact support.\n[attendee-write-error]     An error occurred when trying to save your attendee information. This should not happen under normal conditions. Please try again in a few minutes or contact support.\n[auth-forbidden]           You do not have permission to do this. Contact support if you believe this is a mistake.\n*[unknown]                  The server encountered an unexpected problem while processing your request. Please try again in a few minutes or contact support.\n}\n[paysrv] {$code ->\n*[unknown]                  The server encountered an unexpected problem while processing your request. Please try again in a few minutes or contact support.\n}\n*[frontend] {$code ->\n[network-error]            We could not reach the server to process your request. Please check if you are connected to the internet.\n*[unknown]                  An error occurred when we tried to handle your request. Please try again later. If this problem persists, try clearing your browser cache and refreshing the page. If this does not resolve the problem, contact support.\n}",
+  "funnel-error-report-back": "Try again",
+  "price": "{$value ->\n[0]     Free\n*[other] {NUMBER($value, minimumFractionDigits: 0)}",
+  "due": "{NUMBER($value, minimumFractionDigits: 0)}",
+  "country-name": {
+    "AF": "Afghanistan",
+    "AX": "Åland Islands",
+    "AL": "Albania",
+    "DZ": "Algeria",
+    "AS": "American Samoa",
+    "AD": "Andorra",
+    "AO": "Angola",
+    "AI": "Anguilla",
+    "AQ": "Antarctica",
+    "AG": "Antigua and Barbuda",
+    "AR": "Argentina",
+    "AM": "Armenia",
+    "AW": "Aruba",
+    "AC": "Ascension",
+    "AU": "Australia",
+    "AT": "Austria",
+    "AZ": "Azerbaijan",
+    "BS": "Bahamas",
+    "BH": "Bahrain",
+    "BD": "Bangladesh",
+    "BB": "Barbados",
+    "BY": "Belarus",
+    "BE": "Belgium",
+    "BZ": "Belize",
+    "BJ": "Benin",
+    "BM": "Bermuda",
+    "BT": "Bhutan",
+    "BO": "Bolivia",
+    "BQ": "Bonaire",
+    "BA": "Bosnia and Herzegovina",
+    "BW": "Botswana",
+    "BV": "Bouvet Island",
+    "BR": "Brazil",
+    "IO": "British Indian Ocean Territory",
+    "BN": "Brunei Darussalam",
+    "BG": "Bulgaria",
+    "BF": "Burkina Faso",
+    "BI": "Burundi",
+    "CV": "Cabo Verde",
+    "KH": "Cambodia",
+    "CM": "Cameroon",
+    "CA": "Canada",
+    "KY": "Cayman Islands",
+    "CF": "Central African Republic",
+    "EA": "Ceuta, Melilla",
+    "TD": "Chad",
+    "CL": "Chile",
+    "CN": "China",
+    "CX": "Christmas Island",
+    "CP": "Clipperton",
+    "CC": "Cocos (Keeling) Islands",
+    "CO": "Colombia",
+    "KM": "Comoros",
+    "CG": "Congo",
+    "CD": "Congo (Democratic Republic of the)",
+    "CK": "Cook Islands",
+    "CR": "Costa Rica",
+    "HR": "Croatia",
+    "CU": "Cuba",
+    "CW": "Curaçao",
+    "CY": "Cyprus",
+    "CZ": "Czechia",
+    "CI": "Côte d'Ivoire",
+    "DK": "Denmark",
+    "DG": "Diego Garcia",
+    "DJ": "Djibouti",
+    "DM": "Dominica",
+    "DO": "Dominican Republic",
+    "EC": "Ecuador",
+    "EG": "Egypt",
+    "SV": "El Salvador",
+    "GQ": "Equatorial Guinea",
+    "ER": "Eritrea",
+    "EE": "Estonia",
+    "SZ": "Eswatini",
+    "ET": "Ethiopia",
+    "FK": "Falkland Islands",
+    "FO": "Faroe Islands",
+    "FJ": "Fiji",
+    "FI": "Finland",
+    "FR": "France",
+    "GF": "French Guiana",
+    "PF": "French Polynesia",
+    "TF": "French Southern Territories",
+    "GA": "Gabon",
+    "GM": "Gambia",
+    "GE": "Georgia",
+    "GH": "Ghana",
+    "GI": "Gibraltar",
+    "GR": "Greece",
+    "GL": "Greenland",
+    "GD": "Grenada",
+    "GP": "Guadeloupe",
+    "GU": "Guam",
+    "GT": "Guatemala",
+    "GG": "Guernsey",
+    "GN": "Guinea",
+    "GW": "Guinea-Bissau",
+    "GY": "Guyana",
+    "HT": "Haiti",
+    "HM": "Heard Island and McDonald Islands",
+    "VA": "Holy See (Vatican City State)",
+    "HN": "Honduras",
+    "HK": "Hong Kong",
+    "HU": "Hungary",
+    "IS": "Iceland",
+    "IN": "India",
+    "ID": "Indonesia",
+    "IR": "Iran",
+    "IQ": "Iraq",
+    "IE": "Ireland",
+    "IM": "Isle of Man",
+    "IL": "Israel",
+    "IT": "Italy",
+    "JM": "Jamaica",
+    "JP": "Japan",
+    "JE": "Jersey",
+    "JO": "Jordan",
+    "IC": "Kanarische Inseln",
+    "KZ": "Kazakhstan",
+    "KE": "Kenya",
+    "KI": "Kiribati",
+    "KP": "North Korea",
+    "KR": "South Korea",
+    "KW": "Kuwait",
+    "KG": "Kyrgyzstan",
+    "LA": "Lao",
+    "LV": "Latvia",
+    "LB": "Lebanon",
+    "LS": "Lesotho",
+    "LR": "Liberia",
+    "LY": "Libya",
+    "LI": "Liechtenstein",
+    "LT": "Lithuania",
+    "LU": "Luxembourg",
+    "MO": "Macao",
+    "MG": "Madagascar",
+    "MW": "Malawi",
+    "MY": "Malaysia",
+    "MV": "Maldives",
+    "ML": "Mali",
+    "MT": "Malta",
+    "MH": "Marshall Islands",
+    "MQ": "Martinique",
+    "MR": "Mauritania",
+    "MU": "Mauritius",
+    "YT": "Mayotte",
+    "MX": "Mexico",
+    "FM": "Micronesia",
+    "MD": "Moldova",
+    "MC": "Monaco",
+    "MN": "Mongolia",
+    "ME": "Montenegro",
+    "MS": "Montserrat",
+    "MA": "Morocco",
+    "MZ": "Mozambique",
+    "MM": "Myanmar",
+    "NA": "Namibia",
+    "NR": "Nauru",
+    "NP": "Nepal",
+    "NL": "Netherlands",
+    "NC": "New Caledonia",
+    "NZ": "New Zealand",
+    "NI": "Nicaragua",
+    "NE": "Niger",
+    "NG": "Nigeria",
+    "NU": "Niue",
+    "NF": "Norfolk Island",
+    "MK": "North Macedonia",
+    "MP": "Northern Mariana Islands",
+    "NO": "Norway",
+    "OM": "Oman",
+    "PK": "Pakistan",
+    "PW": "Palau",
+    "PS": "Palestine, State of",
+    "PA": "Panama",
+    "PG": "Papua New Guinea",
+    "PY": "Paraguay",
+    "PE": "Peru",
+    "PH": "Philippines",
+    "PN": "Pitcairn",
+    "PL": "Poland",
+    "PT": "Portugal",
+    "PR": "Puerto Rico",
+    "QA": "Qatar",
+    "RE": "Réunion",
+    "RO": "Romania",
+    "RU": "Russian Federation",
+    "RW": "Rwanda",
+    "BL": "Saint Barthélemy",
+    "SH": "Saint Helena",
+    "KN": "Saint Kitts and Nevis",
+    "LC": "Saint Lucia",
+    "MF": "Saint Martin (French part)",
+    "PM": "Saint Pierre and Miquelon",
+    "VC": "Saint Vincent and the Grenadines",
+    "WS": "Samoa",
+    "SM": "San Marino",
+    "ST": "Sao Tome and Principe",
+    "SA": "Saudi Arabia",
+    "SN": "Senegal",
+    "RS": "Serbia",
+    "SC": "Seychelles",
+    "SL": "Sierra Leone",
+    "SG": "Singapore",
+    "SX": "Sint Maarten (Dutch part)",
+    "SK": "Slovakia",
+    "SI": "Slovenia",
+    "SB": "Solomon Islands",
+    "SO": "Somalia",
+    "ZA": "South Africa",
+    "GS": "South Georgia and the South Sandwich Islands",
+    "SS": "South Sudan",
+    "ES": "Spain",
+    "LK": "Sri Lanka",
+    "SD": "Sudan",
+    "SR": "Suriname",
+    "SJ": "Svalbard",
+    "SE": "Sweden",
+    "CH": "Switzerland",
+    "SY": "Syrian Arab Republic",
+    "TW": "Taiwan",
+    "TJ": "Tajikistan",
+    "TZ": "Tanzania",
+    "TH": "Thailand",
+    "TL": "Timor-Leste",
+    "TG": "Togo",
+    "TK": "Tokelau",
+    "TO": "Tonga",
+    "TT": "Trinidad and Tobago",
+    "TA": "Tristan da Cunha",
+    "TN": "Tunisia",
+    "TR": "Türkiye",
+    "TM": "Turkmenistan",
+    "TC": "Turks and Caicos Islands",
+    "TV": "Tuvalu",
+    "UG": "Uganda",
+    "UA": "Ukraine",
+    "AE": "United Arab Emirates",
+    "GB": "United Kingdom",
+    "UM": "United States Minor Outlying Islands",
+    "US": "United States of America",
+    "UY": "Uruguay",
+    "UZ": "Uzbekistan",
+    "VU": "Vanuatu",
+    "VE": "Venezuela",
+    "VN": "Viet Nam",
+    "VG": "Virgin Islands (British)",
+    "VI": "Virgin Islands (U.S.)",
+    "WF": "Wallis and Futuna",
+    "EH": "Western Sahara",
+    "YE": "Yemen",
+    "ZM": "Zambia",
+    "ZW": "Zimbabwe"
+  },
+  "language-name": {
+    "ach": "Acholi",
+    "ady": "Adyghe",
+    "af": "Afrikaans",
+    "ak": "Akan",
+    "ar": "Arabic",
+    "az": "Azerbaijani",
+    "bg": "Bulgarian",
+    "bn": "Bengali",
+    "br": "Breton",
+    "ca": "Catalan",
+    "cak": "Kaqchikel",
+    "cs": "Czech",
+    "cy": "Welsh",
+    "da": "Danish",
+    "de": "German",
+    "dsb": "Lower Sorbian",
+    "el": "Greek",
+    "en": "English",
+    "eo": "Esperanto",
+    "es": "Spanish",
+    "et": "Estonian",
+    "eu": "Basque",
+    "fa": "Persian",
+    "ff": "Fulah",
+    "fi": "Finnish",
+    "fil": "Filipino",
+    "fo": "Faroese",
+    "fr": "French",
+    "ga": "Irish",
+    "gd": "Gaelic",
+    "gl": "Galician",
+    "gv": "Manx",
+    "he": "Hebrew",
+    "hi": "Hindi",
+    "hr": "Croatian",
+    "hsb": "Upper Sorbian",
+    "ht": "Haitian Creole",
+    "hu": "Hungarian",
+    "hy": "Armenian",
+    "id": "Indonesian",
+    "is": "Icelandic",
+    "it": "Italian",
+    "ja": "Japanese",
+    "km": "Khmer",
+    "kl": "Greenlandic",
+    "kab": "Kabyle",
+    "kn": "Kannada",
+    "ko": "Korean",
+    "kw": "Cornish",
+    "la": "Latin",
+    "lb": "Luxembourgish",
+    "lt": "Lithuanian",
+    "lv": "Latvian",
+    "mai": "Maithili",
+    "mk": "Macedonian",
+    "ml": "Malayalam",
+    "mr": "Marathi",
+    "ms": "Malay",
+    "mt": "Maltese",
+    "my": "Burmese",
+    "no": "Norwegian",
+    "nb": "Norwegian (bokmal)",
+    "ne": "Nepali",
+    "nl": "Dutch",
+    "oc": "Occitan",
+    "pa": "Punjabi",
+    "pl": "Polish",
+    "pt": "Portuguese",
+    "ro": "Romanian",
+    "ru": "Russian",
+    "sh": "Serbo-Croatian",
+    "sk": "Slovak",
+    "sl": "Slovenian",
+    "sq": "Albanian",
+    "sr": "Serbian",
+    "su": "Sundanese",
+    "sv": "Swedish",
+    "sw": "Swahili",
+    "ta": "Tamil",
+    "te": "Telugu",
+    "tg": "Tajik",
+    "th": "Thai",
+    "tl": "Filipino",
+    "tlh": "Klingon",
+    "tr": "Turkish",
+    "uk": "Ukrainian",
+    "ur": "Urdu",
+    "uz": "Uzbek",
+    "vi": "Vietnamese",
+    "yi": "Yiddish",
+    "zh": "Chinese"
+  }
+}

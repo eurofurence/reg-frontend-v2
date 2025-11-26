@@ -1,17 +1,39 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { createFileRoute, useNavigate } from '@tanstack/react-router'
+import { useEffect } from 'react'
+import { useTranslations } from '~/localization'
+import { useRegistrationQuery } from '~/registration/hooks'
 
-export const Route = createFileRoute("/register/")({
+export const Route = createFileRoute('/register/')({
   component: RouteComponent,
-});
+})
 
 function RouteComponent() {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+  const { data, isLoading } = useRegistrationQuery()
+  const t = useTranslations()
 
-  // redirect to the first step after mount
   useEffect(() => {
-    navigate({ to: "/register/ticket/type" as any });
-  }, [navigate]);
+    if (isLoading) {
+      return
+    }
 
-  return null;
+    if (data?.isOpen === false) {
+      navigate({ to: '/register/not-open-yet' })
+      return
+    }
+
+    // If user already has a registration, redirect to summary
+    if (
+      data?.registration &&
+      'id' in data.registration &&
+      typeof data.registration.id === 'number'
+    ) {
+      navigate({ to: '/register/summary' })
+      return
+    }
+
+    navigate({ to: '/register/ticket/type' })
+  }, [data, isLoading, navigate])
+
+  return <div>{t('common-loading')}</div>
 }
