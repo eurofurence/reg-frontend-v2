@@ -26,7 +26,6 @@ export const NavBar = styled.header`
 
 	user-select: none;
 
-	font-family: Roboto;
 	font-weight: 400;
 	font-size: 1.6rem;
 	line-height: 1.5;
@@ -60,8 +59,7 @@ export const NavBarTitle = styled(NavBarSection)`
 	grid-area: left;
 	justify-self: start;
 
-	font-family: Manrope;
-	font-weight: 600;
+	font-weight: 700;
 
 	@media ${phone}, ${tablet} {
 		padding-left: 24px;

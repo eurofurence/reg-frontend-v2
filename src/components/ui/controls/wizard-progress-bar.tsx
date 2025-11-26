@@ -38,7 +38,6 @@ const IndicatorsContainer = styled.div`
 const Caption = styled.div`
 	color: var(--color-brand-2-400);
 
-	font-family: Roboto;
 	font-weight: 400;
 
 	margin-top: 1em;

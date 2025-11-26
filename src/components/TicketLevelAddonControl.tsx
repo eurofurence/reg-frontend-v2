@@ -50,7 +50,6 @@ const OptionsContainer = styled.div`
   grid-area: options;
   justify-self: end;
   width: 25rem;
-  font-family: Manrope;
 `
 
 // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types

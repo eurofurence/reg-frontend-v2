@@ -17,7 +17,6 @@ const Background = styled.footer`
 	align-items: center;
 	padding: 3em 2.7em;
 
-	font-family: Roboto;
 	font-weight: 400;
 	font-size: 1.4rem;
 	line-height: 1.172;

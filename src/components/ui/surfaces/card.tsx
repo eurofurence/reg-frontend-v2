@@ -109,8 +109,7 @@ export default styled.article<CardProps>`
 
 	> header {
 		> h1 {
-			font-family: Manrope;
-			font-weight: 500;
+			font-weight: 700;
 			font-size: 1.25em;
 			line-height: 1.5;
 		}

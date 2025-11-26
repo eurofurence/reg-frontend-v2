@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { type ForwardedRef, forwardRef } from 'react'
-import listItemCheckmark from '../images/list-item-checkmark.svg'
 import listItemCheckmarkHighlighted from '../images/list-item-checkmark-highlighted.svg'
+import listItemCheckmark from '../images/list-item-checkmark.svg'
 import Markdown from './Markdown'
 import { RadioCard, type RadioCardProps } from './ui'
 
@@ -50,8 +50,6 @@ const PriceLabel = styled.p`
 
 const Price = styled.span`
   color: var(--color-brand-2-900);
-  font-family: Roboto;
-  font-weight: 700;
   font-size: 2.4rem;
 
   label[data-checked] & {

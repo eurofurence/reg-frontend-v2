@@ -29,7 +29,6 @@ const Caption = styled.h1`
 const Content = styled.div`
 	color: var(--color-grays-000);
 
-	font-family: Roboto;
 	font-weight: 700;
 	font-size: 2.4rem;
 	line-height: 1.17;

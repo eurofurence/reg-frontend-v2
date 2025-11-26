@@ -2,8 +2,6 @@ import styled from '@emotion/styled'
 
 const Container = styled.section`
   color: var(--color-brand-2-900);
-  font-family: Roboto;
-  font-weight: 700;
   font-size: 2.4rem;
 
   label[data-checked] & {

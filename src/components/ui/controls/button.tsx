@@ -32,7 +32,6 @@ export default styled.button<Props>`
 
 	border-radius: 3px;
 
-	font-family: Roboto;
 	font-size: 1.6rem;
 	font-style: normal;
 	font-weight: 700;
