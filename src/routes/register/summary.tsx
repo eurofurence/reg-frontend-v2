@@ -11,6 +11,7 @@ import { useCurrentLocale, useTranslations } from '~/localization'
 import { hasDraftRegistrationInfo } from '~/registration/autosave'
 import { useRegistrationQuery, useSubmitRegistrationMutation } from '~/registration/hooks'
 import type { RegistrationInfo, RegistrationStatus } from '~/registration/types'
+import { addRegistrationBreadcrumb } from '~/util/sentry'
 import config from '../../config'
 
 export const Route = createFileRoute('/register/summary')({
@@ -187,6 +188,12 @@ function RouteComponent() {
     .join(', ')
 
   const onSubmit = () => {
+    addRegistrationBreadcrumb('summary', 'final-submission', {
+      hasPersonalInfo: Boolean(normalizedInfo.personalInfo),
+      hasContactInfo: Boolean(normalizedInfo.contactInfo),
+      ticketType: normalizedInfo.ticketType?.type,
+      ticketLevel: normalizedInfo.ticketLevel?.level,
+    })
     const registrationData = {
       ...normalizedInfo,
       preferredLocale: currentLocale,

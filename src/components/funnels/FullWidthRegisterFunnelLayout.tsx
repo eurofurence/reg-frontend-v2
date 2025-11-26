@@ -5,6 +5,7 @@ import Page from '~/components/ui/layout/page'
 import * as MediaQueries from '~/components/ui/media-queries'
 import { useTranslations } from '~/localization'
 import { useRegistrationQuery } from '~/registration/hooks'
+import { addNavigationBreadcrumb } from '~/util/sentry'
 import { TOTAL_STEPS } from './constants'
 import RegisterHeader from './RegisterHeader'
 
@@ -82,7 +83,18 @@ const FullWidthRegisterFunnelLayout = ({
       {shouldRenderNavigation && (!isEdit || !isLastPage) ? (
         <Footer>
           <Nav>
-            <Button onClick={onNext}>{t(nextLabelKey)}</Button>
+            <Button
+              onClick={() => {
+                addNavigationBreadcrumb(
+                  isEdit ? 'clicked update' : isLastPage ? 'clicked finish' : 'clicked continue',
+                  `registration-step-${currentStep}`,
+                  { currentStep, isEdit, isLastPage, totalSteps: TOTAL_STEPS },
+                )
+                onNext?.()
+              }}
+            >
+              {t(nextLabelKey)}
+            </Button>
             {isFirstPage && !showBack ? null : (
               <Button
                 type="button"

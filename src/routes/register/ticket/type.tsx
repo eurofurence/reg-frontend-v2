@@ -6,6 +6,7 @@ import { RadioCard, RadioGroup } from '~/components'
 import { useEurofurenceDates } from '~/hooks/useEurofurenceDates'
 import { useTranslations } from '~/localization'
 import { useDraftRegistration, useRegistrationQuery } from '~/registration/hooks'
+import { addRegistrationBreadcrumb } from '~/util/sentry'
 import FullWidthRegisterFunnelLayout from '../../../components/funnels/FullWidthRegisterFunnelLayout'
 import dayTicketImage from '../../../images/con-cats/ticket-types/day.png'
 import fullTicketImage from '../../../images/con-cats/ticket-types/full.png'
@@ -85,6 +86,7 @@ function RouteComponent() {
   }
 
   const onSubmit = (formData: { type: 'full' | 'day' }) => {
+    addRegistrationBreadcrumb('ticket-type', 'selected', { ticketType: formData.type })
     saveDraftRegistration((prev) => {
       if (formData.type === 'day') {
         const existingDay =

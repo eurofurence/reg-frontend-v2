@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { type ForwardedRef, forwardRef } from 'react'
-import listItemCheckmarkHighlighted from '../images/list-item-checkmark-highlighted.svg'
 import listItemCheckmark from '../images/list-item-checkmark.svg'
+import listItemCheckmarkHighlighted from '../images/list-item-checkmark-highlighted.svg'
 import Markdown from './Markdown'
 import { RadioCard, type RadioCardProps } from './ui'
 

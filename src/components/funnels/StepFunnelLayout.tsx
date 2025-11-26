@@ -10,6 +10,7 @@ import Button from '~/components/ui/controls/button'
 import Page from '~/components/ui/layout/page'
 import * as MediaQueries from '~/components/ui/media-queries'
 import { useTranslations } from '~/localization'
+import { addNavigationBreadcrumb } from '~/util/sentry'
 
 const Header = styled.header`
 	margin-bottom: 3em;
@@ -66,7 +67,20 @@ const StepFunnelLayout = ({
       {(isEditMode && isLastPage) || !onNext ? null : (
         <Footer>
           <Nav>
-            <Button onClick={onNext}>
+            <Button
+              onClick={() => {
+                addNavigationBreadcrumb(
+                  isEditMode
+                    ? 'clicked update'
+                    : isLastPage
+                      ? 'clicked finish'
+                      : 'clicked continue',
+                  'funnel-step',
+                  { isEditMode, isLastPage },
+                )
+                onNext?.()
+              }}
+            >
               {isEditMode
                 ? t('register-navigation-update')
                 : isLastPage

@@ -8,6 +8,7 @@ import { Controller, useForm } from 'react-hook-form'
 import { useTranslations } from '~/localization'
 import { hasDraftRegistrationInfo } from '~/registration/autosave'
 import { useDraftRegistration, useRegistrationQuery } from '~/registration/hooks'
+import { addRegistrationBreadcrumb } from '~/util/sentry'
 import WithInvoiceRegisterFunnelLayout from '../../components/funnels/WithInvoiceRegisterFunnelLayout'
 import Checkbox from '../../components/ui/controls/forms/checkbox'
 import FieldSet from '../../components/ui/controls/forms/field-set'
@@ -119,6 +120,12 @@ function RouteComponent() {
   const spaceCount = (s: string) => s.match(reSpace)?.length ?? 0
 
   const onSubmit = (data: any) => {
+    addRegistrationBreadcrumb('personal-info', 'submitted', {
+      hasNickname: Boolean(data.nickname),
+      hasName: Boolean(data.firstName && data.lastName),
+      languageCount: data.spokenLanguages?.length || 0,
+      pronounsSet: Boolean(data.pronounsSelection),
+    })
     saveDraftRegistration((prev) => ({
       ...prev,
       personalInfo: {
