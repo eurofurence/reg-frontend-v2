@@ -6,6 +6,8 @@ This project is based on Bun, which you can find here:
 
 <https://bun.com/docs/installation>
 
+Tip: If you have `npm` already working, `npm install -g bun` does the trick.
+
 ## Install packages
 
 ```bash
