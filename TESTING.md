@@ -55,10 +55,10 @@ approved. Where further status requirements exist, the test case mentions them.
 - delete a pending payment from money transfer -> can now try to pay again
 - checked in registrations can no longer add sponsor/supersponsor, or indeed add packages
 
-## Browser testing
+## 4. Browser testing
 
 Try out a sample of test cases from 1., 2., 3. on a selection of browsers and devices, watch out for design breakage
-and/or
+and/or broken functionality.
 
 - Windows/Firefox
 - Windows/Chrome
