@@ -324,6 +324,14 @@ const configEf = {
       },
       requires: ['stage-pass'],
     },
+    contributor: {
+      prices: {
+        full: 205,
+        day: 140,
+      },
+      requires: ['stage-pass'],
+      includes: ['tshirt'],
+    },
     sponsor: {
       prices: {
         full: 285,
@@ -389,7 +397,7 @@ const configEf = {
     },
     early: {
       price: -15,
-      default: false, // don't forget to increment version when changing this
+      default: true, // don't forget to increment version when changing this
       options: {},
       unavailableFor: {
         type: ['day'],
@@ -399,7 +407,7 @@ const configEf = {
     },
     late: {
       price: 15,
-      default: true, // don't forget to increment version when changing this
+      default: false, // don't forget to increment version when changing this
       options: {},
       unavailableFor: {
         type: ['day'],
@@ -432,7 +440,7 @@ const configEf = {
         },
       },
       unavailableFor: {
-        level: ['standard', 'sponsor', null],
+        level: ['standard', 'contributor', 'sponsor', null],
       },
       hidden: false,
       resetOn: {

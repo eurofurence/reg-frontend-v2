@@ -187,6 +187,7 @@ const attendeeDtoFromRegistrationInfo = (registrationInfo: any) => {
     }
   }
 
+  packagesMap.set('contributor', registrationInfo.ticketLevel?.level === 'contributor' ? 1 : 0)
   packagesMap.set('sponsor', registrationInfo.ticketLevel?.level === 'sponsor' ? 1 : 0)
   packagesMap.set('sponsor2', registrationInfo.ticketLevel?.level === 'super-sponsor' ? 1 : 0)
 
@@ -454,7 +455,9 @@ const registrationInfoFromAttendeeDto = (attendeeDto: any) => {
     ? 'super-sponsor'
     : packagesMap.has('sponsor')
       ? 'sponsor'
-      : 'standard'
+      : packagesMap.has('contributor')
+        ? 'contributor'
+        : 'standard'
 
   const hiddenAddons = Object.fromEntries(
     Object.entries(config.addons || {})

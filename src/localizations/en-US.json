@@ -235,6 +235,11 @@
     "label": "Standard",
     "priceLabel": "{$type ->\n*[full] Standard Ticket\n[day]  Standard Day Ticket\n}"
   },
+  "register-ticket-level-card-contributor": {
+    "value": "As a thank you for your small financial contribution to Eurofurence, you will receive\n+ Contributor convention badge\n+ Program book\n+ Participation in scheduled events\n+ Free T-shirt**",
+    "label": "Contributor",
+    "priceLabel": "{$type ->\n*[full] Contributor Ticket\n[day]  Contributor Day Ticket\n}"
+  },
   "register-ticket-level-card-sponsor": {
     "value": "As a thank you for supporting Eurofurence with a voluntary donation, you will receive\n+ Sponsor convention badge\n+ Program book + honorable mention\n+ Participation in scheduled events\n+ Early access to the Dealers' Den and Art Show (Thursday)\n+ Priority queueing for certain events\n+ Sponsor pack**\n+ Free T-shirt**",
     "label": "Sponsor",
