@@ -113,10 +113,6 @@
     "value": "",
     "name": "Boot VIP"
   },
-  "invoice-item-definition-register-ticket-addons-boat-benefactor": {
-    "value": "",
-    "name": "Boot Sponsor"
-  },
   "invoice-item-definition-register-ticket-addons-artshow-table-half": {
     "value": "",
     "name": "Art Show (halber Tisch)"
@@ -180,6 +176,10 @@
   "invoice-item-definition-register-ticket-addons-artshow-panel-four": {
     "value": "",
     "name": "Art Show (4 Panels)"
+  },
+  "invoice-item-definition-register-ticket-addons-party": {
+    "value": "",
+    "name": "Dead Dog Party"
   },
   "invoice-item-definition-other": {
     "value": "",
@@ -312,6 +312,11 @@
     "label": "Anzahl"
   },
   "register-ticket-level-addons-item-fursuitadd-option-count-value": "{ $value ->\n*[c1]   1x\n[c2]   2x\n[c3]   3x\n[c4]   4x\n[c5]   5x\n[c6]   6x\n[c7]   7x\n[c8]   8x\n[c9]   9x\n[c10]  10x",
+  "register-ticket-level-addons-item-party": {
+    "value": "",
+    "label": "Dead Dog Party",
+    "description": "Party nach der Con am Sonntag abend."
+  },
   "register-ticket-level-validation-errors-addons-benefactor-options-count-required": "Bitte wähle eine Anzahl aus!",
   "register-ticket-level-validation-errors-addons-fursuitadd-options-count-required": "Bitte wähle eine Anzahl zusätzlicher Fursuit Badges aus!",
   "register-personal-info-title": "Deine Informationen",
