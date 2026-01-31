@@ -51,11 +51,11 @@ const configEf = {
   registrationExpirationDate: DateTime.fromISO('2026-08-22', {
     zone: 'Europe/Berlin',
   }), // currently unused
-  hotelBookingLaunch: DateTime.fromISO('2025-01-11T20:00:00+02:00'),
-  eventStartDate: DateTime.fromISO('2026-08-19', { zone: 'Europe/Berlin' }),
-  eventEndDate: DateTime.fromISO('2026-08-23', { zone: 'Europe/Berlin' }),
-  dayTicketStartDate: DateTime.fromISO('2026-08-19', { zone: 'Europe/Berlin' }),
-  dayTicketEndDate: DateTime.fromISO('2026-08-22', { zone: 'Europe/Berlin' }),
+  hotelBookingLaunch: DateTime.fromISO('2026-01-28T12:30:23+02:00'),
+  eventStartDate: DateTime.fromISO('2026-05-29', { zone: 'Europe/Berlin' }),
+  eventEndDate: DateTime.fromISO('2026-06-01', { zone: 'Europe/Berlin' }),
+  dayTicketStartDate: DateTime.fromISO('2026-05-29', { zone: 'Europe/Berlin' }),
+  dayTicketEndDate: DateTime.fromISO('2026-05-31', { zone: 'Europe/Berlin' }),
   earliestBirthDate: DateTime.fromISO('1901-01-01'),
   minimumAge: 18,
   enableRoomshare: false,
@@ -330,7 +330,6 @@ const configEf = {
         day: 155,
       },
       requires: ['stage-pass'],
-      includes: ['tshirt'],
     },
     sponsor: {
       prices: {

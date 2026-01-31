@@ -247,7 +247,7 @@
     "priceLabel": "{$type ->\n*[full] Standard Ticket\n[day]  Standard Day Ticket\n}"
   },
   "register-ticket-level-card-contributor": {
-    "value": "As a thank you for your small financial contribution to Eurofurence, you will receive\n+ Contributor convention badge\n+ Program book\n+ Participation in scheduled events\n+ Free T-shirt**",
+    "value": "The contributor ticket is our new low-entry sponsor level.\n\nIn a world of exploding costs, sponsoring helps keep the base ticket affordable.\n\n+ Contributor convention badge\n+ Program book\n+ Participation in scheduled events\n+ Small but unique collectable token of appreciation",
     "label": "Contributor",
     "priceLabel": "{$type ->\n*[full] Contributor Ticket\n[day]  Contributor Day Ticket\n}"
   },
@@ -263,12 +263,12 @@
   },
   "register-ticket-level-modifiers-early-bird": {
     "value": "",
-    "label": "Early Bird Discount (if paid before March 15th)",
+    "label": "Early Bird Discount (if paid before March 18th)",
     "price": "- €15"
   },
   "register-ticket-level-modifiers-late-fee": {
     "value": "",
-    "label": "Late Fee (if paid June 15th or later)",
+    "label": "Late Fee (if paid May 18th or later)",
     "price": "+ €15"
   },
   "register-ticket-level-footnote-late-sponsors": {

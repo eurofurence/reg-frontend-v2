@@ -213,7 +213,7 @@
   "invoice-pay-button-sepa": "SEPA Überweisung",
   "invoice-card-disabled": "Kartenzahlung z.Zt. nicht verfügbar",
   "invoice-sepa-disabled": "Bitte im Moment nicht überweisen",
-  "register-header-title": "Willkommen zur Eurofurence 2025!",
+  "register-header-title": "Willkommen zur Eurofurence 2026!",
   "register-header-description": "Wir freuen uns auf Dich!\nMach Dich bereit für eine tolle Zeit mit Gleichgesinnten, und genieße das reiche Angebot an Attraktionen und Events.",
   "register-navigation-back": "Zurück",
   "register-navigation-next": "Weiter",
@@ -247,7 +247,7 @@
     "priceLabel": "{$type ->\n*[full] Standard-Ticket\n[day]  Standard-Tagesticket\n}"
   },
   "register-ticket-level-card-contributor": {
-    "value": "Als Dankeschön für Deine kleine finanzielle Unterstützung der Eurofurence erhältst Du\n+ Contributor-Badge\n+ Programmheft\n+ Teilnahme an den regulären Events\n+ kostenloses T-Shirt**",
+    "value": "Der Contributor ist ein neuer Einstiegslevel für Sponsoren.\n\nAngesichts explodierender Kosten hilfst du mit, dass das Standard-Ticket erschwinglich bleibt.\n\n+ Contributor-Badge\n+ Programmheft\n+ Teilnahme an den regulären Events\n+ Andenken für Sammler als kleines Dankeschön",
     "label": "Contributor",
     "priceLabel": "{$type ->\n*[full] Contributor-Ticket\n[day]  Contributor-Tagesticket\n}"
   },
@@ -263,12 +263,12 @@
   },
   "register-ticket-level-modifiers-early-bird": {
     "value": "",
-    "label": "Frühbucherrabatt (bei Zahlung vor 15. März)",
+    "label": "Frühbucherrabatt (bei Zahlung vor 18. März)",
     "price": "-15 €"
   },
   "register-ticket-level-modifiers-late-fee": {
     "value": "",
-    "label": "Spätbucheraufschlag (bei Zahlung ab 15. Juni)",
+    "label": "Spätbucheraufschlag (bei Zahlung ab 18. Mai)",
     "price": "+15 €"
   },
   "register-ticket-level-footnote-late-sponsors": {
@@ -526,7 +526,7 @@
   "register-thank-you-content": "Wir werden Deine Anmeldung prüfen und Dir in wenigen Tagen eine Antwort senden.\nDu erhältst eine Benachrichtigung per Email nachdem wir Deine Anmeldung bearbeitet haben.",
   "register-not-open-yet-title": "Die Registration ist noch nicht geöffnet!",
   "register-not-open-yet-content": "Wir nehmen derzeit keine Anmeldungen an!\nSchau wieder rein wenn die Registration öffnet!",
-  "hotel-booking-header-title": "Willkommen zur Eurofurence 2025!",
+  "hotel-booking-header-title": "Willkommen zur Eurofurence 2026!",
   "hotel-booking-header-description": "In order to speed up hotel booking and increase your chances of securing a room, you can enter your preferred dates,\nhotel room, contact and guest information on the following pages. We will then generate an email template for you,\nwhich you can copy and paste into your email client.\nOnce booking starts, the secret code in the message below will be revealed.\n<span className=\"important\">You need this code for the hotel to accept your booking.</span>\nThe secret code will also be sent out on our [https://twitter.com/eurofurence](Twitter) and Telegram accounts.",
   "hotel-booking-invoice-layout": {
     "value": "",
