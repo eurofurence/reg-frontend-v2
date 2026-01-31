@@ -678,7 +678,7 @@ const configEf = {
     contact: 'https://help.eurofurence.org/contact',
   },
   disablePackageEditForStatuses: ['paid', 'checked-in', 'cancelled'],
-  disableCCPayments: true,
+  disableCCPayments: false,
   disableSEPAPayments: false,
 } as const
 
