@@ -202,6 +202,8 @@
   "invoice-pay-button-loading": "Loading...",
   "invoice-unprocessed-payments": "Your payment is being processed",
   "invoice-pay-button-sepa": "SEPA Transfer",
+  "invoice-card-disabled": "Card payments currently unavailable",
+  "invoice-sepa-disabled": "SEPA transfer currently unavailable",
   "register-header-title": "Welcome to Eurofurence 2026!",
   "register-header-description": "We are very excited that you have decided to join us.\nGet ready for a fun couple of days with like-minded people and enjoy all the activities and events that we have lined up for you this year.",
   "register-navigation-back": "Go back",

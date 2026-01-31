@@ -351,6 +351,8 @@ type Config<TicketLevel extends string, AddonConfigs extends Readonly<Record<str
     readonly contact: string
   }
   readonly disablePackageEditForStatuses: readonly string[]
+  readonly disableCCPayments: boolean
+  readonly disableSEPAPayments: boolean
 }
 
 export const checkConfig = <

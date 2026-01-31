@@ -202,6 +202,8 @@
   "invoice-pay-button-loading": "Laden...",
   "invoice-unprocessed-payments": "Deine Zahlung ist in Bearbeitung.",
   "invoice-pay-button-sepa": "SEPA Überweisung",
+  "invoice-card-disabled": "Kartenzahlung z.Zt. nicht verfügbar",
+  "invoice-sepa-disabled": "Bitte im Moment nicht überweisen",
   "register-header-title": "Willkommen zur Eurofurence 2025!",
   "register-header-description": "Wir freuen uns auf Dich!\nMach Dich bereit für eine tolle Zeit mit Gleichgesinnten, und genieße das reiche Angebot an Attraktionen und Events.",
   "register-navigation-back": "Zurück",

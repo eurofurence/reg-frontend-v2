@@ -9,6 +9,7 @@ import Button from '~/components/ui/controls/button'
 import Spinner from '~/components/ui/controls/spinner'
 import * as MediaQueries from '~/components/ui/media-queries'
 import Card from '~/components/ui/surfaces/card'
+import config from '~/config'
 import { useTranslations } from '~/localization'
 import type { Invoice as InvoiceModel } from '~/types/invoice'
 import InvoiceItem from './InvoiceItem'
@@ -47,6 +48,10 @@ const SepaButton = styled(Button)`
 `
 
 const UnprocessedPayments = styled.p`
+	text-align: center;
+`
+
+const DisabledPayments = styled.p`
 	text-align: center;
 `
 
@@ -109,6 +114,9 @@ const Invoice = ({
 
   const extraText = t('invoice-total.extra')
 
+  const disableCCPayments = config.disableCCPayments
+  const disableSEPAPayments = config.disableSEPAPayments
+
   return (
     <InvoiceCard inverted={true} showOnMobile={showOnMobile}>
       <header>
@@ -160,6 +168,8 @@ const Invoice = ({
         </ul>
         {invoice.due === undefined || invoice.due === 0 ? undefined : unprocessedPayments ? (
           <UnprocessedPayments>{t('invoice-unprocessed-payments')}</UnprocessedPayments>
+        ) : disableCCPayments ? (
+          <DisabledPayments>{t('invoice-card-disabled')}</DisabledPayments>
         ) : (
           <PayButton
             variant="inverted-card"
@@ -177,7 +187,9 @@ const Invoice = ({
           </PayButton>
         )}
         {invoice.due === undefined ||
-        invoice.due === 0 ? undefined : unprocessedPayments ? undefined : (
+        invoice.due === 0 ? undefined : unprocessedPayments ? undefined : disableSEPAPayments ? (
+          <DisabledPayments>{t('invoice-sepa-disabled')}</DisabledPayments>
+        ) : (
           <SepaButton variant="inverted-card" onClick={onSepa === undefined ? undefined : sepa}>
             {t('invoice-pay-button-sepa')}
           </SepaButton>
