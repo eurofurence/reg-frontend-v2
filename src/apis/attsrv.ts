@@ -230,6 +230,7 @@ const attendeeDtoFromRegistrationInfo = (registrationInfo: any) => {
       ? countAsNumber(registrationInfo.ticketLevel.addons.fursuitadd.options.count)
       : 0,
   )
+  packagesMap.set('party', registrationInfo.ticketLevel.addons.party.selected ? 1 : 0)
 
   const packagesList = Array.from(packagesMap.entries())
     .filter(([, c]) => c > 0)
@@ -243,7 +244,7 @@ const attendeeDtoFromRegistrationInfo = (registrationInfo: any) => {
       .map(([id, _]: [string, any]) => [id, { selected: packagesMap.has(id), options: {} }]),
   )
 
-  const addons: any = {
+  const addons: Record<string, { selected: boolean; options: Record<string, any> }> = {
     ...hiddenAddons,
     'stage-pass': {
       selected:
@@ -260,6 +261,10 @@ const attendeeDtoFromRegistrationInfo = (registrationInfo: any) => {
       },
     },
     fursuit: { selected: packagesMap.has('fursuit'), options: {} },
+    party: {
+      selected: packagesMap.has('party'),
+      options: {},
+    },
   }
 
   if (packagesMap.has('benefactor'))
@@ -465,7 +470,7 @@ const registrationInfoFromAttendeeDto = (attendeeDto: any) => {
       .map(([id, _]: [string, any]) => [id, { selected: packagesMap.has(id), options: {} }]),
   )
 
-  const addons: any = {
+  const addons: Record<string, { selected: boolean; options: Record<string, any> }> = {
     ...hiddenAddons,
     'stage-pass': {
       selected:
@@ -480,6 +485,10 @@ const registrationInfoFromAttendeeDto = (attendeeDto: any) => {
       options: { size: tshirtFromApi(attendeeDto.tshirt_size) },
     },
     fursuit: { selected: packagesMap.has('fursuit'), options: {} },
+    party: {
+      selected: packagesMap.has('party'),
+      options: {},
+    },
   }
 
   if (packagesMap.has('benefactor'))
