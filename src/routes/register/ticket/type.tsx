@@ -112,9 +112,9 @@ function RouteComponent() {
     })
 
     if (formData.type === 'day') {
-      navigate({ to: '/register/ticket/day' as any })
+      navigate({ href: '/register/ticket/day' })
     } else {
-      navigate({ to: '/register/ticket/level' as any })
+      navigate({ href: '/register/ticket/level' })
     }
   }
 

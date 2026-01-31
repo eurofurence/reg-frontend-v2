@@ -58,7 +58,7 @@ function RouteComponent() {
   // Redirect to step 1 if no draft data exists
   useEffect(() => {
     if (!isLoading && !hasDraftRegistrationInfo(data?.registration?.registrationInfo)) {
-      navigate({ to: '/register/ticket/type' as any })
+      navigate({ href: '/register/ticket/type' })
     }
   }, [isLoading, navigate, data?.registration?.registrationInfo])
 
@@ -85,7 +85,7 @@ function RouteComponent() {
       },
     }))
 
-    navigate({ to: '/register/summary' as any })
+    navigate({ href: '/register/summary' })
   }
 
   return (

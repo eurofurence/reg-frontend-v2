@@ -200,10 +200,10 @@ function RouteComponent() {
     if (!isLoading) {
       if (!registrationInfo?.ticketType) {
         // No ticket type selected, go to type selection
-        navigate({ to: '/register/ticket/type' as any })
+        navigate({ href: '/register/ticket/type' })
       } else if (registrationInfo.ticketType.type === 'day' && !registrationInfo.ticketType.day) {
         // Day ticket but no day selected, go to day selection
-        navigate({ to: '/register/ticket/day' as any })
+        navigate({ href: '/register/ticket/day' })
       }
       // If ticketType is 'full' or ('day' with day selected), stay on level page
     }
@@ -238,7 +238,7 @@ function RouteComponent() {
         addons: formData.addons as TicketLevelAddons,
       },
     }))
-    navigate({ to: '/register/personal-info' as any })
+    navigate({ href: '/register/personal-info' })
   }
 
   const handleAddonChange = (addonId: keyof typeof config.addons, selected: boolean) => {

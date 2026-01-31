@@ -150,7 +150,7 @@ function RouteComponent() {
 
   useEffect(() => {
     if (!isLoading && !hasDraftRegistrationInfo(info)) {
-      navigate({ to: '/register/ticket/type' as any })
+      navigate({ href: '/register/ticket/type' })
     }
   }, [info, isLoading, navigate])
 
@@ -201,7 +201,7 @@ function RouteComponent() {
 
     submitMutation.mutate(registrationData as RegistrationInfo, {
       onSuccess: () => {
-        navigate({ to: '/register/thank-you' as any })
+        navigate({ href: '/register/thank-you' })
       },
       onError: (error) => {
         console.error('Registration submission failed:', error)

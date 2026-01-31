@@ -9,6 +9,8 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PaymentSuccessRouteImport } from './routes/payment-success'
+import { Route as PaymentFailureRouteImport } from './routes/payment-failure'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RegisterIndexRouteImport } from './routes/register/index'
 import { Route as RegisterTicketRouteImport } from './routes/register/ticket'
@@ -22,6 +24,16 @@ import { Route as RegisterTicketTypeRouteImport } from './routes/register/ticket
 import { Route as RegisterTicketLevelRouteImport } from './routes/register/ticket/level'
 import { Route as RegisterTicketDayRouteImport } from './routes/register/ticket/day'
 
+const PaymentSuccessRoute = PaymentSuccessRouteImport.update({
+  id: '/payment-success',
+  path: '/payment-success',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PaymentFailureRoute = PaymentFailureRouteImport.update({
+  id: '/payment-failure',
+  path: '/payment-failure',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -85,6 +97,8 @@ const RegisterTicketDayRoute = RegisterTicketDayRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/payment-failure': typeof PaymentFailureRoute
+  '/payment-success': typeof PaymentSuccessRoute
   '/register/contact': typeof RegisterContactRoute
   '/register/not-open-yet': typeof RegisterNotOpenYetRoute
   '/register/optional': typeof RegisterOptionalRoute
@@ -92,13 +106,15 @@ export interface FileRoutesByFullPath {
   '/register/summary': typeof RegisterSummaryRoute
   '/register/thank-you': typeof RegisterThankYouRoute
   '/register/ticket': typeof RegisterTicketRouteWithChildren
-  '/register': typeof RegisterIndexRoute
+  '/register/': typeof RegisterIndexRoute
   '/register/ticket/day': typeof RegisterTicketDayRoute
   '/register/ticket/level': typeof RegisterTicketLevelRoute
   '/register/ticket/type': typeof RegisterTicketTypeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/payment-failure': typeof PaymentFailureRoute
+  '/payment-success': typeof PaymentSuccessRoute
   '/register/contact': typeof RegisterContactRoute
   '/register/not-open-yet': typeof RegisterNotOpenYetRoute
   '/register/optional': typeof RegisterOptionalRoute
@@ -114,6 +130,8 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/payment-failure': typeof PaymentFailureRoute
+  '/payment-success': typeof PaymentSuccessRoute
   '/register/contact': typeof RegisterContactRoute
   '/register/not-open-yet': typeof RegisterNotOpenYetRoute
   '/register/optional': typeof RegisterOptionalRoute
@@ -130,6 +148,8 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/payment-failure'
+    | '/payment-success'
     | '/register/contact'
     | '/register/not-open-yet'
     | '/register/optional'
@@ -137,13 +157,15 @@ export interface FileRouteTypes {
     | '/register/summary'
     | '/register/thank-you'
     | '/register/ticket'
-    | '/register'
+    | '/register/'
     | '/register/ticket/day'
     | '/register/ticket/level'
     | '/register/ticket/type'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/payment-failure'
+    | '/payment-success'
     | '/register/contact'
     | '/register/not-open-yet'
     | '/register/optional'
@@ -158,6 +180,8 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/payment-failure'
+    | '/payment-success'
     | '/register/contact'
     | '/register/not-open-yet'
     | '/register/optional'
@@ -173,6 +197,8 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  PaymentFailureRoute: typeof PaymentFailureRoute
+  PaymentSuccessRoute: typeof PaymentSuccessRoute
   RegisterContactRoute: typeof RegisterContactRoute
   RegisterNotOpenYetRoute: typeof RegisterNotOpenYetRoute
   RegisterOptionalRoute: typeof RegisterOptionalRoute
@@ -185,6 +211,20 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/payment-success': {
+      id: '/payment-success'
+      path: '/payment-success'
+      fullPath: '/payment-success'
+      preLoaderRoute: typeof PaymentSuccessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/payment-failure': {
+      id: '/payment-failure'
+      path: '/payment-failure'
+      fullPath: '/payment-failure'
+      preLoaderRoute: typeof PaymentFailureRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -195,7 +235,7 @@ declare module '@tanstack/react-router' {
     '/register/': {
       id: '/register/'
       path: '/register'
-      fullPath: '/register'
+      fullPath: '/register/'
       preLoaderRoute: typeof RegisterIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
@@ -290,6 +330,8 @@ const RegisterTicketRouteWithChildren = RegisterTicketRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  PaymentFailureRoute: PaymentFailureRoute,
+  PaymentSuccessRoute: PaymentSuccessRoute,
   RegisterContactRoute: RegisterContactRoute,
   RegisterNotOpenYetRoute: RegisterNotOpenYetRoute,
   RegisterOptionalRoute: RegisterOptionalRoute,

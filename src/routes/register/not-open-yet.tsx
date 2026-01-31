@@ -19,7 +19,7 @@ function RouteComponent() {
 
       <button
         type="button"
-        onClick={() => navigate({ to: '/' as any })}
+        onClick={() => navigate({ href: '/' })}
         style={{
           marginTop: '1.5rem',
           padding: '0.75rem 1.5rem',

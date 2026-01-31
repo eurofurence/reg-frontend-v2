@@ -72,10 +72,10 @@ function RouteComponent() {
     if (!isLoading) {
       if (!registrationInfo?.ticketType) {
         // No ticket type selected, go to type selection
-        navigate({ to: '/register/ticket/type' as any })
+        navigate({ href: '/register/ticket/type' })
       } else if (registrationInfo.ticketType.type !== 'day') {
         // Not a day ticket, go to type selection
-        navigate({ to: '/register/ticket/type' as any })
+        navigate({ href: '/register/ticket/type' })
       }
       // If ticketType is 'day', stay on day page
     }
@@ -134,7 +134,7 @@ function RouteComponent() {
         day: DateTime.fromISO(formData.day, { zone: 'Europe/Berlin' }),
       },
     }))
-    navigate({ to: '/register/ticket/level' as any })
+    navigate({ href: '/register/ticket/level' })
   }
 
   const handleNext = handleSubmit(onSubmit)
