@@ -45,7 +45,7 @@ const JuniorSuiteImageComponent = createRoomImage(JuniorSuiteImage, 'Junior suit
 const DeluxeSuiteImageComponent = createRoomImage(DeluxeSuiteImage, 'Deluxe suite')
 
 const configEf = {
-  version: 12, // increment to prevent loading local storage (new year, pricing changes, default packages)
+  version: 13, // increment to prevent loading local storage (new year, pricing changes, default packages)
   eventName: 'Eurofurence',
   registrationLaunch: DateTime.fromISO('2026-01-01T20:00:00+02:00'), // set early enough to allow testing
   registrationExpirationDate: DateTime.fromISO('2026-08-22', {
@@ -396,7 +396,7 @@ const configEf = {
     },
     early: {
       price: -15,
-      default: true, // don't forget to increment version when changing this
+      default: false, // don't forget to increment version when changing this
       options: {},
       unavailableFor: {
         type: ['day'],
@@ -640,7 +640,7 @@ const configEf = {
       default: false,
       options: {},
       hidden: false,
-      unavailable: false,
+      unavailable: true,
     },
   },
   rooms: [
