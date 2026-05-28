@@ -98,6 +98,15 @@ function RouteComponent() {
     reset(defaultValues)
   }, [defaultValues, reset])
 
+  const pronounsSelection = watch('pronounsSelection')
+  const pronounsOther = watch('pronounsOther')
+
+  useEffect(() => {
+    if (pronounsSelection !== 'other' && pronounsOther) {
+      setValue('pronounsOther', '', { shouldValidate: true })
+    }
+  }, [pronounsSelection, pronounsOther, setValue])
+
   // Redirect to step 1 if no draft data exists
   useEffect(() => {
     if (!isLoading && !hasDraftRegistrationInfo(data?.registration?.registrationInfo)) {
@@ -112,7 +121,6 @@ function RouteComponent() {
   if (data?.isOpen === false) {
     return <div>{t('register-not-open-yet-title')}</div>
   }
-  const pronounsSelection = watch('pronounsSelection')
 
   const reAlphaNum = /[\p{Letter}\p{Number}]/gu
   const alphaNumCount = (s: string) => s.match(reAlphaNum)?.length ?? 0
