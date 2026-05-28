@@ -108,6 +108,10 @@
     "value": "",
     "name": "Dealers' Den (2 Tables)"
   },
+  "invoice-item-definition-register-ticket-addons-dealer-triple": {
+    "value": "",
+    "name": "Dealers' Den (3 Tables)"
+  },
   "invoice-item-definition-register-ticket-addons-dealer-quad": {
     "value": "",
     "name": "Dealers' Den (4 Tables)"

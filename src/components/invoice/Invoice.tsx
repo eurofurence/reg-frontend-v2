@@ -77,7 +77,7 @@ const Invoice = ({
 }: InvoiceProps) => {
   const t = useTranslations()
 
-  const getItemName = (id: string, options?: Record<string, any>): string => {
+  const getItemName = (id: string): string => {
     const translationKey = `invoice-item-definition-${id}.name`
 
     // Try to get the translated name
@@ -86,11 +86,6 @@ const Invoice = ({
     // If the translation key doesn't exist, fall back to a readable version
     if (translatedName === translationKey) {
       return id.replace(/register-ticket-(type|addons)-/g, '').replace(/-/g, ' ')
-    }
-
-    // Handle special cases like t-shirt sizes
-    if (id === 'register-ticket-addons-tshirt' && options?.size) {
-      return `${translatedName} (${options.size})`
     }
 
     return translatedName
@@ -132,17 +127,20 @@ const Invoice = ({
           {invoice.items.map(({ id, options, amount, totalPrice }) => {
             const urlKey = `invoice-item-definition-${id}.url`
             const linktextKey = `invoice-item-definition-${id}.linktext`
+            const extraKey = `invoice-item-definition-${id}.extra`
             const url = t(urlKey)
             const linktext = t(linktextKey)
+            const extra = t(extraKey, options)
 
             return (
               <InvoiceItem
                 key={id}
                 amount={amount}
-                name={getItemName(id, options)}
+                name={getItemName(id)}
                 price={totalPrice}
                 url={url === urlKey ? undefined : url}
                 linktext={linktext === linktextKey ? undefined : linktext}
+                extra={extra === extraKey || extra === '' ? undefined : extra}
               />
             )
           })}

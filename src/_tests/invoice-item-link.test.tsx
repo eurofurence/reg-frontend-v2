@@ -24,4 +24,10 @@ describe('InvoiceItem link', () => {
 
     expect(screen.queryByRole('link')).toBeNull()
   })
+
+  it('renders extra text when provided', () => {
+    render(<InvoiceItem amount={1} name="T-shirt" price={25} extra="wM" />)
+
+    expect(screen.getByText('wM')).toBeTruthy()
+  })
 })

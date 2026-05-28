@@ -70,6 +70,9 @@ const buildInvoiceItems = (
     const options: Record<string, any> = {}
     if (ticketType.type === 'day' && ticketType.day) {
       options.day = ticketType.day.toISODate()
+    } else if (ticketType.type === 'full') {
+      options.start = config.eventStartDate.toISODate()
+      options.end = config.eventEndDate.toISODate()
     }
 
     items.push({
@@ -159,7 +162,11 @@ const WithInvoiceRegisterFunnelLayout = ({
         <Invoice
           title={t('register-invoice-layout.invoiceTitle')}
           editLink={
-            isEditMode && currentStep === TOTAL_STEPS - 1 ? '/register/ticket/level' : undefined
+            isEditMode &&
+            currentStep === TOTAL_STEPS - 1 &&
+            !config.disablePackageEditForStatuses.includes(registration?.status ?? '')
+              ? '/register/ticket/level'
+              : undefined
           }
           invoice={invoice}
           showOnMobile={isLastPage}
