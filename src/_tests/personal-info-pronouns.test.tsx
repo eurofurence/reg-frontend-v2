@@ -1,39 +1,13 @@
-import { beforeAll, describe, expect, it, mock } from 'bun:test'
+import './_route-mocks'
+import { beforeAll, describe, expect, it } from 'bun:test'
 import { fireEvent, render, waitFor } from '@testing-library/react'
 import type { ReactNode } from 'react'
-
-mock.module('@tanstack/react-router', () => ({
-  createFileRoute: () => (opts: unknown) => opts,
-  useNavigate: () => () => {},
-}))
-
-const registrationData = {
-  isOpen: true,
-  registration: { registrationInfo: { personalInfo: {} } },
-}
-
-mock.module('~/registration/hooks', () => ({
-  useRegistrationQuery: () => ({ data: registrationData, isLoading: false }),
-  useDraftRegistration: () => ({ saveDraftRegistration: () => {} }),
-}))
-
-mock.module('~/registration/autosave', () => ({
-  hasDraftRegistrationInfo: () => true,
-}))
-
-mock.module('~/localization', () => ({
-  useTranslations: () => (key: string) => key,
-}))
-
-mock.module('~/components/funnels/WithInvoiceRegisterFunnelLayout', () => ({
-  default: ({ children }: { children: ReactNode }) => <>{children}</>,
-}))
+import { loadRouteComponent } from './_route-mocks'
 
 let Personal: () => ReactNode
 
 beforeAll(async () => {
-  const { Route } = await import('~/routes/register/personal-info')
-  Personal = (Route as unknown as { component: () => ReactNode }).component
+  Personal = await loadRouteComponent('~/routes/register/personal-info')
 })
 
 const typeInOther = (container: HTMLElement, value: string) => {
