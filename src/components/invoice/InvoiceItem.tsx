@@ -42,13 +42,25 @@ export interface InvoiceItemProps {
   readonly name: string
   readonly price: number
   readonly extra?: string
+  readonly url?: string
+  readonly linktext?: string
 }
 
-const InvoiceItem = ({ amount, name, price, extra }: InvoiceItemProps) => (
+const InvoiceItem = ({ amount, name, price, extra, url, linktext }: InvoiceItemProps) => (
   <Container>
-    <Label>
-      {amount} x {name}
-    </Label>
+    {url ? (
+      <Label>
+        {amount} x {name} (
+        <a href={url} target="_blank" rel="noopener noreferrer">
+          {linktext}
+        </a>
+        )
+      </Label>
+    ) : (
+      <Label>
+        {amount} x {name}
+      </Label>
+    )}
     <Price>{price} €</Price>
     {extra === undefined ? undefined : <Extra>{extra}</Extra>}
   </Container>

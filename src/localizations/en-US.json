@@ -84,7 +84,9 @@
   },
   "invoice-item-definition-register-ticket-addons-fursuit": {
     "value": "",
-    "name": "Fursuit Badge (free)"
+    "name": "Fursuit Badge (free)",
+    "url": "https://fursuit.eurofurence.org",
+    "linktext": "customize"
   },
   "invoice-item-definition-register-ticket-addons-fursuitadd": {
     "value": "",
@@ -188,7 +190,9 @@
   },
   "invoice-item-definition-register-ticket-addons-party": {
     "value": "",
-    "name": "Dead Dog Party"
+    "name": "Dead Dog Party",
+    "url": "https://placeholderclub.com/EF",
+    "linktext": "important info"
   },
   "invoice-item-definition-other": {
     "value": "",
@@ -322,7 +326,7 @@
   "register-ticket-level-addons-item-party": {
     "value": "",
     "label": "Dead Dog Party",
-    "description": "A party on Sunday evening."
+    "description": "Celebrate the glowing finale of the EF with PHC and become part of one of Europe’s largest fur dances. Sunday 18:00 Club Docks. Tickets are limited!"
   },
   "register-ticket-level-validation-errors-level-required": "Please select a ticket level!",
   "register-ticket-level-validation-errors-addons-tshirt-options-size-required": "Please select a T-shirt size!",

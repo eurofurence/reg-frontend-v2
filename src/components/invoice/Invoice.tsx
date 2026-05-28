@@ -129,14 +129,23 @@ const Invoice = ({
       </header>
       <section>
         <ul>
-          {invoice.items.map(({ id, options, amount, totalPrice }) => (
-            <InvoiceItem
-              key={id}
-              amount={amount}
-              name={getItemName(id, options)}
-              price={totalPrice}
-            />
-          ))}
+          {invoice.items.map(({ id, options, amount, totalPrice }) => {
+            const urlKey = `invoice-item-definition-${id}.url`
+            const linktextKey = `invoice-item-definition-${id}.linktext`
+            const url = t(urlKey)
+            const linktext = t(linktextKey)
+
+            return (
+              <InvoiceItem
+                key={id}
+                amount={amount}
+                name={getItemName(id, options)}
+                price={totalPrice}
+                url={url === urlKey ? undefined : url}
+                linktext={linktext === linktextKey ? undefined : linktext}
+              />
+            )
+          })}
         </ul>
       </section>
       <section>

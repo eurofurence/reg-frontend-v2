@@ -84,7 +84,9 @@
   },
   "invoice-item-definition-register-ticket-addons-fursuit": {
     "value": "",
-    "name": "Fursuit Badge (inkl.)"
+    "name": "Fursuit Badge (inkl.)",
+    "url": "https://fursuit.eurofurence.org",
+    "linktext": "konfigurieren"
   },
   "invoice-item-definition-register-ticket-addons-fursuitadd": {
     "value": "",
@@ -188,7 +190,9 @@
   },
   "invoice-item-definition-register-ticket-addons-party": {
     "value": "",
-    "name": "Dead Dog Party"
+    "name": "Dead Dog Party",
+    "url": "https://placeholderclub.com/EF",
+    "linktext": "wichtige Infos"
   },
   "invoice-item-definition-other": {
     "value": "",
@@ -298,7 +302,7 @@
   "register-ticket-level-validation-errors-addons-tshirt-options-size-required": "Bitte wähle eine T-Shirt-Größe aus!",
   "register-ticket-level-addons-item-benefactor": {
     "value": "",
-    "label": "Benefaktor",
+    "label": "Benefactor",
     "description": "Dein freiwilliger Extrabeitrag für eine noch außergewöhnlichere Eurofurence. Als Benefactor kannst du uns direkt unterstützen und dazu beitragen, Vielfalt und Qualität der Eurofurence zu fördern, neue Ideen und Projekte zu realisieren und das Event noch inklusiver, kreativer und aufregender zu machen."
   },
   "register-ticket-level-addons-item-benefactor-option-count": {
@@ -324,7 +328,7 @@
   "register-ticket-level-addons-item-party": {
     "value": "",
     "label": "Dead Dog Party",
-    "description": "Party nach der Con am Sonntag abend."
+    "description": "Feiert das leuchtende Finale der EF mit PHC und werdet Teil eines der größten Furdances Europas. Sonntag 18:00 Club Docks. Tickets sind limitiert!"
   },
   "register-ticket-level-validation-errors-addons-benefactor-options-count-required": "Bitte wähle eine Anzahl aus!",
   "register-ticket-level-validation-errors-addons-fursuitadd-options-count-required": "Bitte wähle eine Anzahl zusätzlicher Fursuit Badges aus!",
