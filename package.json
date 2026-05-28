@@ -17,7 +17,6 @@
     "date-fns": "^4.1.0",
     "gt-react": "^10.10.4",
     "http-status-codes": "^2.3.0",
-    "langmap": "^0.0.16",
     "luxon": "^3.7.2",
     "ramda": "^0.32.0",
     "react": "^19.2.4",

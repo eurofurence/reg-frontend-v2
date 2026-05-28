@@ -1,10 +1,9 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
-// @ts-expect-error
-import langMap from 'langmap'
 import { DateTime } from 'luxon'
 import { pluck, prop, sortBy } from 'ramda'
 import { useEffect, useMemo } from 'react'
 import { Controller, useForm } from 'react-hook-form'
+import { languageNames } from '~/data/languages'
 import { useTranslations } from '~/localization'
 import { hasDraftRegistrationInfo } from '~/registration/autosave'
 import { useDraftRegistration, useRegistrationQuery } from '~/registration/hooks'
@@ -43,19 +42,14 @@ function RouteComponent() {
   const { languageOptions, languageOptionsByValue } = useMemo(() => {
     const languageOptions = sortBy(
       prop('label'),
-      Object.entries(langMap)
-        .filter(([key]) => !(key as string).includes('-') && !(key as string).includes('@'))
-        .map(([value, names]) => ({
-          label: (names as any).englishName || value,
-          value,
-        })),
+      Object.entries(languageNames).map(([value, label]) => ({ label, value })),
     )
 
     return {
       languageOptions,
       languageOptionsByValue: new Map(languageOptions.map((l) => [l.value, l])),
     }
-  }, [t])
+  }, [])
 
   const personalInfo = data?.registration?.registrationInfo?.personalInfo
 
