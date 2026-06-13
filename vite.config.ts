@@ -7,6 +7,20 @@ import { defineConfig } from 'vite'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [tanstackRouter({ autoCodeSplitting: true }), viteReact(), tailwindcss()],
+  build: {
+    rollupOptions: {
+      output: {
+        codeSplitting: {
+          groups: [
+            { name: 'react', test: /node_modules[\\/](react|react-dom|scheduler)[\\/]/, priority: 3 },
+            { name: 'tanstack', test: /node_modules[\\/]@tanstack[\\/]/, priority: 2 },
+            { name: 'sentry', test: /node_modules[\\/]@sentry[\\/]/, priority: 2 },
+            { name: 'vendor', test: /node_modules[\\/]/, priority: 1 },
+          ],
+        },
+      },
+    },
+  },
   resolve: {
     alias: {
       '@': resolve(__dirname, './src'),
