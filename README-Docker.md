@@ -51,7 +51,12 @@ The Dockerfile uses a multi-stage build:
 
 ### Environment Variables
 
+These are read at **container start** (nginx config is rendered from a template by the entrypoint):
+
 - `NODE_ENV=production` - Set for production builds
+- `NGINX_CONF_SERVER_NAME` - nginx `server_name` (default `localhost`)
+- `NGINX_CONF_PATH_PREFIX` - path prefix used in the proxy locations **and** substituted into served HTML/JS/CSS in place of the `__PATH_PREFIX__` token (`sub_filter`). The frontend build must emit `__PATH_PREFIX__` wherever the deploy prefix belongs.
+- `NGINX_CONF_MAINTENANCE` - when non-empty (e.g. `on`), all SPA routes return `503` with `maintenance.html`. Unset/empty = normal operation. Toggle by restarting the container with a different value.
 
 ## Development vs Production
 

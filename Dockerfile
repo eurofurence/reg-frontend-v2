@@ -22,9 +22,13 @@ FROM nginx:alpine AS runner
 # Copy built application from builder stage
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Copy nginx configuration for SPA routing with environment variable substitution
-COPY docker/nginx.conf /etc/nginx/conf.d/default.conf.template
-RUN envsubst '${NGINX_CONF_SERVER_NAME} ${NGINX_CONF_PATH_PREFIX}' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf
+# Maintenance page served when NGINX_CONF_MAINTENANCE is set
+COPY docker/maintenance.html /usr/share/nginx/html/maintenance.html
+
+# Nginx config is rendered at container start so env vars take effect at runtime
+COPY docker/nginx.conf /etc/nginx/templates/default.conf.template
+COPY docker/docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
 
 # Ensure nginx user owns required directories (nginx user already exists in nginx:alpine)
 RUN mkdir -p /var/cache/nginx/proxy && \
@@ -42,5 +46,5 @@ USER nginx
 # Expose port 80
 EXPOSE 80
 
-# Start nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Render config from env, then start nginx
+ENTRYPOINT ["/docker-entrypoint.sh"]
