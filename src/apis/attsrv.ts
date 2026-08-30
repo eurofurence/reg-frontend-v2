@@ -230,7 +230,7 @@ const attendeeDtoFromRegistrationInfo = (registrationInfo: any) => {
       ? countAsNumber(registrationInfo.ticketLevel.addons.fursuitadd.options.count)
       : 0,
   )
-  packagesMap.set('party', registrationInfo.ticketLevel.addons.party.selected ? 1 : 0)
+  packagesMap.set('party', registrationInfo.ticketLevel.addons.party?.selected ? 1 : 0)
 
   const packagesList = Array.from(packagesMap.entries())
     .filter(([, c]) => c > 0)

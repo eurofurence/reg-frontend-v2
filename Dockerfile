@@ -43,8 +43,8 @@ RUN mkdir -p /var/cache/nginx/proxy && \
 # Switch to non-root user
 USER nginx
 
-# Expose port 80
-EXPOSE 80
+# Expose port 8080 - unprivileged containers may not open privileged ports
+EXPOSE 8080
 
 # Render config from env, then start nginx
 ENTRYPOINT ["/docker-entrypoint.sh"]
