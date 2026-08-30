@@ -1,5 +1,6 @@
 import { mock } from 'bun:test'
 import type { ReactNode } from 'react'
+import config from '~/config'
 import type { RegistrationInfo, RegistrationStatus } from '~/registration/types'
 
 export const registrationData: {
@@ -29,7 +30,7 @@ mock.module('~/registration/hooks', () => ({
     saveDraftRegistration: (
       update: (prev: Partial<RegistrationInfo>) => Partial<RegistrationInfo>,
     ) => {
-      savedDrafts.push(update({}))
+      savedDrafts.push(update(registrationData.registration.registrationInfo))
     },
   }),
   useSubmitRegistrationMutation: () => ({ mutate: () => {} }),
@@ -50,6 +51,30 @@ mock.module('~/apis/authsrv', () => ({
 
 mock.module('~/components/funnels/WithInvoiceRegisterFunnelLayout', () => ({
   default: ({ children }: { children: ReactNode }) => <>{children}</>,
+}))
+
+mock.module('~/components/funnels/FullWidthRegisterFunnelLayout', () => ({
+  default: ({ children, onNext }: { children: ReactNode; onNext?: () => void }) => (
+    <>
+      {children}
+      <button type="button" data-testid="funnel-next" onClick={onNext}>
+        next
+      </button>
+    </>
+  ),
+}))
+
+mock.module('~/hooks/useEurofurenceDates', () => ({
+  useEurofurenceDates: () => ({
+    dates: {
+      registrationLaunch: config.registrationLaunch,
+      registrationExpiration: config.registrationExpirationDate,
+      conventionStart: config.eventStartDate,
+      conventionEnd: config.eventEndDate,
+    },
+    isLoading: false,
+    error: null,
+  }),
 }))
 
 export const loadRouteComponent = async (path: string) => {

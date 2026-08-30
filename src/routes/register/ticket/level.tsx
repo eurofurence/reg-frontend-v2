@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { RadioGroup, TicketLevelAddon, TicketLevelCard, TicketLevelFootnote } from '~/components'
 import { useTranslations } from '~/localization'
+import { determineDefaultAddons } from '~/registration/addons'
 import { useDraftRegistration, useRegistrationQuery } from '~/registration/hooks'
 import type { TicketLevelAddons } from '~/registration/types'
 import FullWidthRegisterFunnelLayout from '../../../components/funnels/FullWidthRegisterFunnelLayout'
@@ -78,7 +79,10 @@ function RouteComponent() {
   }>({
     defaultValues: {
       level: defaultLevel,
-      addons: registrationInfo?.ticketLevel?.addons ?? {},
+      addons: {
+        ...determineDefaultAddons(ticketType?.type),
+        ...(registrationInfo?.ticketLevel?.addons ?? {}),
+      },
     },
   })
 

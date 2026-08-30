@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 import { RadioCard, RadioGroup } from '~/components'
 import { useEurofurenceDates } from '~/hooks/useEurofurenceDates'
 import { useTranslations } from '~/localization'
+import { determineDefaultAddons } from '~/registration/addons'
 import { useDraftRegistration, useRegistrationQuery } from '~/registration/hooks'
 import { addRegistrationBreadcrumb } from '~/util/sentry'
 import FullWidthRegisterFunnelLayout from '../../../components/funnels/FullWidthRegisterFunnelLayout'
@@ -88,6 +89,17 @@ function RouteComponent() {
   const onSubmit = (formData: { type: 'full' | 'day' }) => {
     addRegistrationBreadcrumb('ticket-type', 'selected', { ticketType: formData.type })
     saveDraftRegistration((prev) => {
+      // The other type has different hidden packages and defaults, so the level starts over.
+      const resetLevel =
+        prev.ticketLevel && prev.ticketType?.type !== formData.type
+          ? {
+              ticketLevel: {
+                level: null,
+                addons: determineDefaultAddons(formData.type),
+              },
+            }
+          : {}
+
       if (formData.type === 'day') {
         const existingDay =
           prev.ticketType?.type === 'day'
@@ -98,6 +110,7 @@ function RouteComponent() {
 
         return {
           ...prev,
+          ...resetLevel,
           ticketType: {
             type: 'day',
             day: existingDay ?? dates.conventionStart,
@@ -107,6 +120,7 @@ function RouteComponent() {
 
       return {
         ...prev,
+        ...resetLevel,
         ticketType: { type: 'full' },
       }
     })
