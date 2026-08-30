@@ -45,17 +45,17 @@ const JuniorSuiteImageComponent = createRoomImage(JuniorSuiteImage, 'Junior suit
 const DeluxeSuiteImageComponent = createRoomImage(DeluxeSuiteImage, 'Deluxe suite')
 
 const configEf = {
-  version: 14, // increment to prevent loading local storage (new year, pricing changes, default packages)
+  version: 16, // increment to prevent loading local storage (new year, pricing changes, default packages)
   eventName: 'Eurofurence',
   registrationLaunch: DateTime.fromISO('2026-01-01T20:00:00+02:00'), // set early enough to allow testing
   registrationExpirationDate: DateTime.fromISO('2026-08-22', {
     zone: 'Europe/Berlin',
   }), // currently unused
-  hotelBookingLaunch: DateTime.fromISO('2026-01-28T12:30:23+02:00'),
-  eventStartDate: DateTime.fromISO('2026-05-29', { zone: 'Europe/Berlin' }),
-  eventEndDate: DateTime.fromISO('2026-06-01', { zone: 'Europe/Berlin' }),
-  dayTicketStartDate: DateTime.fromISO('2026-05-29', { zone: 'Europe/Berlin' }),
-  dayTicketEndDate: DateTime.fromISO('2026-05-31', { zone: 'Europe/Berlin' }),
+  hotelBookingLaunch: DateTime.fromISO('2026-01-11T20:00:00+02:00'),
+  eventStartDate: DateTime.fromISO('2026-08-19', { zone: 'Europe/Berlin' }),
+  eventEndDate: DateTime.fromISO('2026-08-23', { zone: 'Europe/Berlin' }),
+  dayTicketStartDate: DateTime.fromISO('2026-08-19', { zone: 'Europe/Berlin' }),
+  dayTicketEndDate: DateTime.fromISO('2026-08-22', { zone: 'Europe/Berlin' }),
   earliestBirthDate: DateTime.fromISO('1901-01-01'),
   minimumAge: 18,
   enableRoomshare: false,

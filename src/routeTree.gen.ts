@@ -106,7 +106,7 @@ export interface FileRoutesByFullPath {
   '/register/summary': typeof RegisterSummaryRoute
   '/register/thank-you': typeof RegisterThankYouRoute
   '/register/ticket': typeof RegisterTicketRouteWithChildren
-  '/register/': typeof RegisterIndexRoute
+  '/register': typeof RegisterIndexRoute
   '/register/ticket/day': typeof RegisterTicketDayRoute
   '/register/ticket/level': typeof RegisterTicketLevelRoute
   '/register/ticket/type': typeof RegisterTicketTypeRoute
@@ -157,7 +157,7 @@ export interface FileRouteTypes {
     | '/register/summary'
     | '/register/thank-you'
     | '/register/ticket'
-    | '/register/'
+    | '/register'
     | '/register/ticket/day'
     | '/register/ticket/level'
     | '/register/ticket/type'
@@ -235,7 +235,7 @@ declare module '@tanstack/react-router' {
     '/register/': {
       id: '/register/'
       path: '/register'
-      fullPath: '/register/'
+      fullPath: '/register'
       preLoaderRoute: typeof RegisterIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
