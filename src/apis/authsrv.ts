@@ -57,10 +57,7 @@ export const useUserInfoQuery = () =>
   })
 
 export const startLoginRedirect = (returnTo?: string) => {
-  const dropoffUrl =
-    import.meta.env.DEV || import.meta.env.MODE === 'development'
-      ? ''
-      : `&dropoff_url=${encodeURIComponent(returnTo ?? window.location.href)}`
+  const dropoffUrl = encodeURIComponent(returnTo ?? window.location.href)
 
-  window.location.href = `${config.apis.authsrv.url}/auth?app_name=${config.apis.authsrv.appName}${dropoffUrl}`
+  window.location.href = `${config.apis.authsrv.url}/auth?app_name=${config.apis.authsrv.appName}&dropoff_url=${dropoffUrl}`
 }
