@@ -642,7 +642,7 @@ const configEf = {
       hidden: true,
       unavailable: false,
     },
-    'party': {
+    party: {
       price: 10,
       default: false,
       options: {},
