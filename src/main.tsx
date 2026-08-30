@@ -5,7 +5,7 @@ import { QueryClientProvider } from '@tanstack/react-query'
 import { createRouter, RouterProvider } from '@tanstack/react-router'
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
-import { LocalizationProvider } from './localization'
+import { initializeLocalization, LocalizationProvider } from './localization'
 import queryClient from './queryClient'
 import reportWebVitals from './reportWebVitals'
 import { routeTree } from './routeTree.gen'
@@ -48,6 +48,8 @@ try {
   throw error
 }
 
+const locale = await initializeLocalization()
+
 // Render the app
 const rootElement = document.getElementById('app')
 if (rootElement && !rootElement.innerHTML) {
@@ -56,7 +58,7 @@ if (rootElement && !rootElement.innerHTML) {
     root.render(
       <StrictMode>
         <QueryClientProvider client={queryClient}>
-          <LocalizationProvider>
+          <LocalizationProvider locale={locale}>
             <RouterProvider router={router} />
           </LocalizationProvider>
         </QueryClientProvider>

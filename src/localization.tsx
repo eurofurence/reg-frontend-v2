@@ -1,12 +1,16 @@
-import { GTProvider, useLocale, useSetLocale } from 'gt-react'
+import {
+  createOrUpdateBrowserConditionStore,
+  GTProvider,
+  initializeGTSPA,
+  useLocale,
+  useSetLocale,
+} from 'gt-react'
 import type { ReactNode } from 'react'
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 
 export const supportedLocales = ['en-US', 'de-DE'] as const
 export type Locale = (typeof supportedLocales)[number]
 export const defaultLocale: Locale = 'en-US'
-
-const LOCALE_STORAGE_KEY = 'locale'
 
 type Dictionary = Record<string, unknown>
 
@@ -34,20 +38,7 @@ const DictionaryContext = createContext<Dictionary | null>(null)
 
 const DictionaryLoader = ({ children }: { children: ReactNode }) => {
   const locale = useLocale() as Locale | undefined
-  const setLocale = useSetLocale()
   const [dictionary, setDictionary] = useState<Dictionary | null>(null)
-  const [hasInitialized, setHasInitialized] = useState(false)
-
-  // Load initial locale from localStorage on mount
-  useEffect(() => {
-    if (typeof window !== 'undefined' && !hasInitialized) {
-      const stored = window.localStorage.getItem(LOCALE_STORAGE_KEY)
-      if (stored && isLocale(stored) && stored !== locale) {
-        setLocale(stored)
-      }
-      setHasInitialized(true)
-    }
-  }, [hasInitialized, locale, setLocale])
 
   useEffect(() => {
     const load = async () => {
@@ -57,25 +48,30 @@ const DictionaryLoader = ({ children }: { children: ReactNode }) => {
     load()
   }, [locale])
 
-  // Simple locale persistence that doesn't interfere with gt-react
-  useEffect(() => {
-    if (typeof window !== 'undefined' && locale) {
-      window.localStorage.setItem(LOCALE_STORAGE_KEY, locale)
-    }
-  }, [locale])
-
   return <DictionaryContext.Provider value={dictionary}>{children}</DictionaryContext.Provider>
 }
 
-export const LocalizationProvider = ({ children }: { children: ReactNode }) => (
-  <GTProvider
-    locales={[...supportedLocales]}
-    defaultLocale={defaultLocale}
-    enableI18n={true}
-    loadDictionary={loadDictionary}
-    runtimeUrl={undefined}
-    projectId={undefined}
-  >
+// gt-react v11 reads locale config from a module-level singleton, so this has to
+// resolve before anything renders a GT hook or provider.
+export const initializeLocalization = async () => {
+  await initializeGTSPA({
+    defaultLocale,
+    locales: [...supportedLocales],
+    enableI18n: true,
+  })
+
+  return createOrUpdateBrowserConditionStore({}).getLocale()
+}
+
+// Translations come from our own dictionary context, so GT only tracks the locale.
+export const LocalizationProvider = ({
+  locale,
+  children,
+}: {
+  locale: string
+  children: ReactNode
+}) => (
+  <GTProvider locale={locale} translations={{}}>
     <DictionaryLoader>{children}</DictionaryLoader>
   </GTProvider>
 )
@@ -92,9 +88,6 @@ export const useLocaleControls = () => {
     setLocale: (next: Locale) => setLocale(next),
   }
 }
-
-const isLocale = (value: string): value is Locale =>
-  supportedLocales.some((locale) => locale === value)
 
 // Helper to get nested values from dictionary objects (e.g., "key.label" or "key.caption")
 const getNestedValue = (obj: unknown, path: string): string | undefined => {

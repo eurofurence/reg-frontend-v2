@@ -1,10 +1,10 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { DateTime } from 'luxon'
-import { pluck, prop, sortBy } from 'ramda'
+import { pluck } from 'ramda'
 import { useEffect, useMemo } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { languageNames } from '~/data/languages'
-import { useTranslations } from '~/localization'
+import { languageCodes } from '~/data/languages'
+import { useCurrentLocale, useTranslations } from '~/localization'
 import { hasDraftRegistrationInfo } from '~/registration/autosave'
 import { useDraftRegistration, useRegistrationQuery } from '~/registration/hooks'
 import { sanitizeSingleLine } from '~/util/sanitize'
@@ -39,18 +39,19 @@ function RouteComponent() {
   const { saveDraftRegistration } = useDraftRegistration()
   const navigate = useNavigate()
   const t = useTranslations()
+  const locale = useCurrentLocale()
 
   const { languageOptions, languageOptionsByValue } = useMemo(() => {
-    const languageOptions = sortBy(
-      prop('label'),
-      Object.entries(languageNames).map(([value, label]) => ({ label, value })),
-    )
+    const formatter = new Intl.Collator(locale)
+    const languageOptions = languageCodes
+      .map((value) => ({ value, label: t(`language-name.${value}`) }))
+      .sort((a, b) => formatter.compare(a.label, b.label))
 
     return {
       languageOptions,
       languageOptionsByValue: new Map(languageOptions.map((l) => [l.value, l])),
     }
-  }, [])
+  }, [locale, t])
 
   const personalInfo = data?.registration?.registrationInfo?.personalInfo
 

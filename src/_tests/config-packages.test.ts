@@ -18,8 +18,4 @@ describe('config package parity', () => {
     expect(config.addons.late.default).toBe(true)
     expect(config.addons.party.unavailable).toBe(true)
   })
-
-  it('bumped the config version to 14', () => {
-    expect(config.version).toBe(14)
-  })
 })

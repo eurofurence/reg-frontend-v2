@@ -1,17 +1,17 @@
 import { describe, expect, it } from 'bun:test'
-import { languageNames } from '~/data/languages'
+import { languageCodes } from '~/data/languages'
 import deDE from '~/localizations/de-DE.json'
 import enUS from '~/localizations/en-US.json'
 
 describe('Belarusian language', () => {
-  it('includes Belarusian in the vendored language list', () => {
-    expect(languageNames.be).toBe('Belarusian')
+  it('includes Belarusian in the curated language list', () => {
+    expect(languageCodes).toContain('be')
   })
 
   it('preserves the curated languages that ISO-639-1 lacks', () => {
-    expect(languageNames.tlh).toBe('Klingon')
-    expect(languageNames.dsb).toBe('Lower Sorbian')
-    expect(languageNames.en).toBe('English')
+    expect(languageCodes).toContain('tlh')
+    expect(languageCodes).toContain('dsb')
+    expect(languageCodes).toContain('en')
   })
 
   it('has the be language-name entry in both localizations', () => {

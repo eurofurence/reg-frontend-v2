@@ -1,12 +1,18 @@
 import { mock } from 'bun:test'
 import type { ReactNode } from 'react'
-import type { RegistrationInfo } from '~/registration/types'
+import type { RegistrationInfo, RegistrationStatus } from '~/registration/types'
 
-export const registrationData = {
+export const registrationData: {
+  isOpen: boolean
+  registration: {
+    status: RegistrationStatus
+    registrationInfo: Partial<RegistrationInfo>
+  }
+} = {
   isOpen: true,
   registration: {
     status: 'unsubmitted',
-    registrationInfo: { personalInfo: {}, contactInfo: {} },
+    registrationInfo: {},
   },
 }
 
@@ -26,6 +32,7 @@ mock.module('~/registration/hooks', () => ({
       savedDrafts.push(update({}))
     },
   }),
+  useSubmitRegistrationMutation: () => ({ mutate: () => {} }),
 }))
 
 mock.module('~/registration/autosave', () => ({

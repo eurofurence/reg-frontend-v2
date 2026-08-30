@@ -2,16 +2,19 @@ import './_route-mocks'
 import { beforeAll, beforeEach, describe, expect, it } from 'bun:test'
 import { fireEvent, render, waitFor } from '@testing-library/react'
 import type { ReactNode } from 'react'
+import type { ContactInfo } from '~/registration/types'
 import { loadRouteComponent, registrationData, savedDrafts } from './_route-mocks'
 
 let Contact: () => ReactNode
 
-const cleanContact = {
+const cleanContact: ContactInfo = {
   email: 'john@example.com',
   phoneNumber: '+49 170 1234567',
+  telegramUsername: null,
   street: 'Main Street 1',
   postalCode: '10115',
   city: 'Berlin',
+  stateOrProvince: null,
   country: 'DE',
 }
 
@@ -23,8 +26,11 @@ beforeEach(() => {
   savedDrafts.length = 0
 })
 
-const submitRestoredDraft = async (contactInfo: Record<string, unknown>) => {
-  registrationData.registration.registrationInfo.contactInfo = { ...cleanContact, ...contactInfo }
+const submitRestoredDraft = async (contactInfo: Partial<ContactInfo>) => {
+  registrationData.registration.registrationInfo = {
+    ...registrationData.registration.registrationInfo,
+    contactInfo: { ...cleanContact, ...contactInfo },
+  }
 
   const { container } = render(<Contact />)
   fireEvent.submit(container.querySelector('form') as HTMLFormElement)

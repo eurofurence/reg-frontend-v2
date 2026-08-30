@@ -286,7 +286,9 @@ function RouteComponent() {
             {
               id: 'spoken-languages',
               wide: true,
-              value: personalInfo.spokenLanguages.join(', '),
+              value: personalInfo.spokenLanguages
+                .map((code) => t(`language-name.${code}`))
+                .join(', '),
             },
           ]}
         />

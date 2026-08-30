@@ -3,16 +3,20 @@ import { beforeAll, beforeEach, describe, expect, it } from 'bun:test'
 import { fireEvent, render, waitFor } from '@testing-library/react'
 import { DateTime } from 'luxon'
 import type { ReactNode } from 'react'
+import type { PersonalInfo } from '~/registration/types'
 import { loadRouteComponent, registrationData, savedDrafts } from './_route-mocks'
 
 let Personal: () => ReactNode
 
-const cleanPersonalInfo = {
+const cleanPersonalInfo: PersonalInfo = {
   nickname: 'Johnny',
   firstName: 'John',
   lastName: 'Sergal',
-  spokenLanguages: ['en'],
   dateOfBirth: DateTime.fromISO('1990-06-15'),
+  fullNamePermission: false,
+  spokenLanguages: ['en'],
+  pronouns: null,
+  wheelchair: false,
 }
 
 beforeAll(async () => {
@@ -23,13 +27,10 @@ beforeEach(() => {
   savedDrafts.length = 0
 })
 
-const submit = async (
-  personalInfo: Record<string, unknown>,
-  typed: Record<string, string> = {},
-) => {
-  registrationData.registration.registrationInfo.personalInfo = {
-    ...cleanPersonalInfo,
-    ...personalInfo,
+const submit = async (personalInfo: Partial<PersonalInfo>, typed: Record<string, string> = {}) => {
+  registrationData.registration.registrationInfo = {
+    ...registrationData.registration.registrationInfo,
+    personalInfo: { ...cleanPersonalInfo, ...personalInfo },
   }
 
   const { container } = render(<Personal />)
