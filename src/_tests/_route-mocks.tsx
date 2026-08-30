@@ -1,5 +1,6 @@
 import { mock } from 'bun:test'
 import type { ReactNode } from 'react'
+import type { RegistrationInfo } from '~/registration/types'
 
 export const registrationData = {
   isOpen: true,
@@ -14,9 +15,17 @@ mock.module('@tanstack/react-router', () => ({
   useNavigate: () => () => {},
 }))
 
+export const savedDrafts: Partial<RegistrationInfo>[] = []
+
 mock.module('~/registration/hooks', () => ({
   useRegistrationQuery: () => ({ data: registrationData, isLoading: false }),
-  useDraftRegistration: () => ({ saveDraftRegistration: () => {} }),
+  useDraftRegistration: () => ({
+    saveDraftRegistration: (
+      update: (prev: Partial<RegistrationInfo>) => Partial<RegistrationInfo>,
+    ) => {
+      savedDrafts.push(update({}))
+    },
+  }),
 }))
 
 mock.module('~/registration/autosave', () => ({

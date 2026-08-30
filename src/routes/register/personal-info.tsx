@@ -7,6 +7,7 @@ import { languageNames } from '~/data/languages'
 import { useTranslations } from '~/localization'
 import { hasDraftRegistrationInfo } from '~/registration/autosave'
 import { useDraftRegistration, useRegistrationQuery } from '~/registration/hooks'
+import { sanitizeSingleLine } from '~/util/sanitize'
 import { addRegistrationBreadcrumb } from '~/util/sentry'
 import WithInvoiceRegisterFunnelLayout from '../../components/funnels/WithInvoiceRegisterFunnelLayout'
 import Checkbox from '../../components/ui/controls/forms/checkbox'
@@ -121,7 +122,7 @@ function RouteComponent() {
   const reSpace = /[\p{White_Space}]/gu
   const spaceCount = (s: string) => s.match(reSpace)?.length ?? 0
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: PersonalFormValues) => {
     addRegistrationBreadcrumb('personal-info', 'submitted', {
       hasNickname: Boolean(data.nickname),
       hasName: Boolean(data.firstName && data.lastName),
@@ -131,9 +132,9 @@ function RouteComponent() {
     saveDraftRegistration((prev) => ({
       ...prev,
       personalInfo: {
-        nickname: data.nickname ?? '',
-        firstName: data.firstName ?? '',
-        lastName: data.lastName ?? '',
+        nickname: sanitizeSingleLine(data.nickname ?? ''),
+        firstName: sanitizeSingleLine(data.firstName ?? ''),
+        lastName: sanitizeSingleLine(data.lastName ?? ''),
         fullNamePermission: Boolean(data.fullNamePermission),
         dateOfBirth: DateTime.fromISO(String(data.dateOfBirth ?? ''), { zone: 'Europe/Berlin' }),
         spokenLanguages: data.spokenLanguages || [],
@@ -232,14 +233,12 @@ function RouteComponent() {
             required: t('register-personal-info-validation-errors-date-of-birth-required'),
             validate: {
               minimumAge: (v) =>
-                DateTime.fromISO(v ?? '', { zone: 'Europe/Berlin' }) <=
-                  (config.eventStartDate as any).minus({
-                    years: config.minimumAge,
-                  }) ||
+                DateTime.fromISO(v ?? '', { zone: 'Europe/Berlin' }).toMillis() <=
+                  config.eventStartDate.minus({ years: config.minimumAge }).toMillis() ||
                 t('register-personal-info-validation-errors-date-of-birth-validate-minimum-age'),
               maximumAge: (v) =>
-                DateTime.fromISO(v ?? '', { zone: 'Europe/Berlin' }) >=
-                  (config.earliestBirthDate as any) ||
+                DateTime.fromISO(v ?? '', { zone: 'Europe/Berlin' }).toMillis() >=
+                  config.earliestBirthDate.toMillis() ||
                 t('register-personal-info-validation-errors-date-of-birth-validate-maximum-age'),
             },
           })}

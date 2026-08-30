@@ -12,6 +12,7 @@ import { useCurrentLocale, useTranslations } from '~/localization'
 import { hasDraftRegistrationInfo } from '~/registration/autosave'
 import { useDraftRegistration, useRegistrationQuery } from '~/registration/hooks'
 import { type ContactInfo, isSubmitted } from '~/registration/types'
+import { sanitizeSingleLine } from '~/util/sanitize'
 
 const reEmail = /^[^@\p{Space_Separator}]+@[^@\p{Space_Separator}]+$/u
 const reTelegram = /^@.+$/u
@@ -135,16 +136,16 @@ function RouteComponent() {
     saveDraftRegistration((prev) => ({
       ...prev,
       contactInfo: {
-        email: data.email.trim(),
-        phoneNumber: data.phoneNumber.trim(),
+        email: sanitizeSingleLine(data.email),
+        phoneNumber: sanitizeSingleLine(data.phoneNumber),
         telegramUsername: (() => {
-          const trimmed = data.telegramUsername?.trim()
-          return trimmed ? (trimmed.startsWith('@') ? trimmed : `@${trimmed}`) : null
+          const username = sanitizeSingleLine(data.telegramUsername ?? '')
+          return username ? (username.startsWith('@') ? username : `@${username}`) : null
         })(),
-        street: data.street.trim(),
-        city: data.city.trim(),
-        postalCode: data.postalCode.trim(),
-        stateOrProvince: data.stateOrProvince?.trim() ? data.stateOrProvince.trim() : null,
+        street: sanitizeSingleLine(data.street),
+        city: sanitizeSingleLine(data.city),
+        postalCode: sanitizeSingleLine(data.postalCode),
+        stateOrProvince: sanitizeSingleLine(data.stateOrProvince ?? '') || null,
         country,
       },
     }))
