@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "files": {
-    "includes": ["src/**", "!src/routeTree.gen.ts"]
+    "includes": ["src/**", "!src/routeTree.gen.ts", "!src/stylesheets/typography.css", "!**/*.svg"]
   },
   "vcs": {
     "enabled": true,
@@ -32,14 +32,14 @@
     "actions": {
       "source": {
         "organizeImports": "on",
-        "recommended": true
+        "preset": "recommended"
       }
     }
   },
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true,
+      "preset": "recommended",
       "style": {
         "noNonNullAssertion": "off"
       },

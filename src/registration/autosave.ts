@@ -102,7 +102,7 @@ const deserializeTicketType = (
 const deserializePersonalInfo = (
   personalInfo: RegistrationInfo['personalInfo'] | SerializedPersonalInfo | undefined,
 ): RegistrationInfo['personalInfo'] | undefined => {
-  if (!personalInfo || !personalInfo.dateOfBirth) {
+  if (!personalInfo?.dateOfBirth) {
     return undefined
   }
 
