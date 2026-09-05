@@ -8,7 +8,12 @@ import TextArea from '~/components/ui/controls/forms/text-area'
 import Form from '~/components/ui/layout/form'
 import { useTranslations } from '~/localization'
 import { hasDraftRegistrationInfo } from '~/registration/autosave'
-import { useDraftRegistration, useRegistrationQuery } from '~/registration/hooks'
+import {
+  useDraftRegistration,
+  useRegistrationQuery,
+  useUpdateRegistrationMutation,
+} from '~/registration/hooks'
+import { isSubmitted } from '~/registration/types'
 
 type OptionalFormValues = {
   notifications: {
@@ -28,10 +33,12 @@ export const Route = createFileRoute('/register/optional')({
 function RouteComponent() {
   const { data, isLoading } = useRegistrationQuery()
   const { saveDraftRegistration } = useDraftRegistration()
+  const updateMutation = useUpdateRegistrationMutation()
   const navigate = useNavigate()
   const t = useTranslations()
 
-  const optionalInfo = data?.registration?.registrationInfo?.optionalInfo
+  const registration = data?.registration
+  const optionalInfo = registration?.registrationInfo?.optionalInfo
 
   const defaultValues = useMemo<OptionalFormValues>(
     () => ({
@@ -71,19 +78,29 @@ function RouteComponent() {
   }
 
   const onSubmit = (values: OptionalFormValues) => {
-    saveDraftRegistration((prev) => ({
-      ...prev,
-      optionalInfo: {
-        notifications: {
-          art: values.notifications.art,
-          animation: values.notifications.animation,
-          music: values.notifications.music,
-          fursuiting: values.notifications.fursuiting,
-        },
-        digitalConbook: values.digitalConbook,
-        comments: values.comments.trim() === '' ? null : values.comments.trim(),
+    const updatedOptionalInfo = {
+      notifications: {
+        art: values.notifications.art,
+        animation: values.notifications.animation,
+        music: values.notifications.music,
+        fursuiting: values.notifications.fursuiting,
       },
-    }))
+      digitalConbook: values.digitalConbook,
+      comments: values.comments.trim() === '' ? null : values.comments.trim(),
+    }
+
+    if (registration && isSubmitted(registration)) {
+      updateMutation.mutate(
+        {
+          id: registration.id,
+          registrationInfo: { ...registration.registrationInfo, optionalInfo: updatedOptionalInfo },
+        },
+        { onSuccess: () => navigate({ href: '/register/summary' }) },
+      )
+      return
+    }
+
+    saveDraftRegistration((prev) => ({ ...prev, optionalInfo: updatedOptionalInfo }))
 
     navigate({ href: '/register/summary' })
   }

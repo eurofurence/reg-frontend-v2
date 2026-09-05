@@ -25,6 +25,8 @@ import type {
   RegistrationInfo,
 } from './types'
 
+export { useDraftRegistration } from './draft'
+
 const mapPendingRegistration = (
   id: number,
   status: PendingRegistration['status'],
@@ -212,46 +214,10 @@ export const useUpdateRegistrationMutation = () => {
           registrationId: variables.id,
         },
       })
+
+      alert(`Registration update failed: ${error.message || 'Unknown error'}`)
     },
   })
-}
-
-export const useDraftRegistration = () => {
-  const queryClient = useQueryClient()
-
-  const saveDraftRegistration = (
-    updater: (prev: Partial<RegistrationInfo>) => Partial<RegistrationInfo>,
-  ) => {
-    const cached = queryClient.getQueryData<RegistrationQueryResult>(registrationQueryKey)
-    const previousInfo = deserializeRegistrationInfo(cached?.registration?.registrationInfo) ?? {}
-    const nextInfo = updater(previousInfo)
-
-    queryClient.setQueryData<RegistrationQueryResult>(registrationQueryKey, {
-      isOpen: true,
-      registration: {
-        status: 'unsubmitted',
-        registrationInfo: nextInfo,
-      },
-      lastSavedAt: new Date().toISOString(),
-    })
-  }
-
-  const clearDraft = () => {
-    queryClient.setQueryData<RegistrationQueryResult>(registrationQueryKey, (old) =>
-      old
-        ? {
-            ...old,
-            registration: {
-              status: 'unsubmitted',
-              registrationInfo: {},
-            },
-            lastSavedAt: undefined,
-          }
-        : old,
-    )
-  }
-
-  return { saveDraftRegistration, clearDraft }
 }
 
 export const useInitiateCreditCardPayment = () => {

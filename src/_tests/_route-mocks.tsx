@@ -1,11 +1,14 @@
 import { mock } from 'bun:test'
 import type { ReactNode } from 'react'
 import config from '~/config'
+import * as localization from '~/localization'
+import * as autosave from '~/registration/autosave'
 import type { RegistrationInfo, RegistrationStatus } from '~/registration/types'
 
 export const registrationData: {
   isOpen: boolean
   registration: {
+    id?: number
     status: RegistrationStatus
     registrationInfo: Partial<RegistrationInfo>
   }
@@ -17,12 +20,17 @@ export const registrationData: {
   },
 }
 
+export const navigations: string[] = []
+
 mock.module('@tanstack/react-router', () => ({
   createFileRoute: () => (opts: unknown) => opts,
-  useNavigate: () => () => {},
+  useNavigate: () => (opts: { href: string }) => {
+    navigations.push(opts.href)
+  },
 }))
 
 export const savedDrafts: Partial<RegistrationInfo>[] = []
+export const updateCalls: { id: number; registrationInfo: Partial<RegistrationInfo> }[] = []
 
 mock.module('~/registration/hooks', () => ({
   useRegistrationQuery: () => ({ data: registrationData, isLoading: false }),
@@ -34,13 +42,26 @@ mock.module('~/registration/hooks', () => ({
     },
   }),
   useSubmitRegistrationMutation: () => ({ mutate: () => {} }),
+  useUpdateRegistrationMutation: () => ({
+    mutate: (
+      variables: { id: number; registrationInfo: Partial<RegistrationInfo> },
+      options?: { onSuccess?: () => void },
+    ) => {
+      updateCalls.push(variables)
+      options?.onSuccess?.()
+    },
+  }),
 }))
 
+// Module mocks leak into every file of a plain `bun test` run, so keep the real exports
+// around for the tests that exercise these modules directly.
 mock.module('~/registration/autosave', () => ({
+  ...autosave,
   hasDraftRegistrationInfo: () => true,
 }))
 
 mock.module('~/localization', () => ({
+  ...localization,
   useTranslations: () => (key: string) => key,
   useCurrentLocale: () => 'en-US',
 }))

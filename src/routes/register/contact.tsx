@@ -10,7 +10,11 @@ import Form from '~/components/ui/layout/form'
 import config from '~/config'
 import { useCurrentLocale, useTranslations } from '~/localization'
 import { hasDraftRegistrationInfo } from '~/registration/autosave'
-import { useDraftRegistration, useRegistrationQuery } from '~/registration/hooks'
+import {
+  useDraftRegistration,
+  useRegistrationQuery,
+  useUpdateRegistrationMutation,
+} from '~/registration/hooks'
 import { type ContactInfo, isSubmitted } from '~/registration/types'
 import { sanitizeSingleLine } from '~/util/sanitize'
 
@@ -40,6 +44,7 @@ function RouteComponent() {
   const { data: registrationData, isLoading } = useRegistrationQuery()
   const { data: userInfo } = useUserInfoQuery()
   const { saveDraftRegistration } = useDraftRegistration()
+  const updateMutation = useUpdateRegistrationMutation()
   const navigate = useNavigate()
   const t = useTranslations()
   const locale = useCurrentLocale()
@@ -133,22 +138,32 @@ function RouteComponent() {
   const onSubmit = (data: ContactFormValues) => {
     const country = isAllowedCountry(data.country) ? data.country : allowedCountries[0]
 
-    saveDraftRegistration((prev) => ({
-      ...prev,
-      contactInfo: {
-        email: sanitizeSingleLine(data.email),
-        phoneNumber: sanitizeSingleLine(data.phoneNumber),
-        telegramUsername: (() => {
-          const username = sanitizeSingleLine(data.telegramUsername ?? '')
-          return username ? (username.startsWith('@') ? username : `@${username}`) : null
-        })(),
-        street: sanitizeSingleLine(data.street),
-        city: sanitizeSingleLine(data.city),
-        postalCode: sanitizeSingleLine(data.postalCode),
-        stateOrProvince: sanitizeSingleLine(data.stateOrProvince ?? '') || null,
-        country,
-      },
-    }))
+    const contactInfo: ContactInfo = {
+      email: sanitizeSingleLine(data.email),
+      phoneNumber: sanitizeSingleLine(data.phoneNumber),
+      telegramUsername: (() => {
+        const username = sanitizeSingleLine(data.telegramUsername ?? '')
+        return username ? (username.startsWith('@') ? username : `@${username}`) : null
+      })(),
+      street: sanitizeSingleLine(data.street),
+      city: sanitizeSingleLine(data.city),
+      postalCode: sanitizeSingleLine(data.postalCode),
+      stateOrProvince: sanitizeSingleLine(data.stateOrProvince ?? '') || null,
+      country,
+    }
+
+    if (registration && isSubmitted(registration)) {
+      updateMutation.mutate(
+        {
+          id: registration.id,
+          registrationInfo: { ...registration.registrationInfo, contactInfo },
+        },
+        { onSuccess: () => navigate({ href: '/register/summary' }) },
+      )
+      return
+    }
+
+    saveDraftRegistration((prev) => ({ ...prev, contactInfo }))
 
     navigate({ href: '/register/optional' })
   }

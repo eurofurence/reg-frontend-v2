@@ -6,7 +6,12 @@ import { Controller, useForm } from 'react-hook-form'
 import { languageCodes } from '~/data/languages'
 import { useCurrentLocale, useTranslations } from '~/localization'
 import { hasDraftRegistrationInfo } from '~/registration/autosave'
-import { useDraftRegistration, useRegistrationQuery } from '~/registration/hooks'
+import {
+  useDraftRegistration,
+  useRegistrationQuery,
+  useUpdateRegistrationMutation,
+} from '~/registration/hooks'
+import { isSubmitted } from '~/registration/types'
 import { sanitizeSingleLine } from '~/util/sanitize'
 import { addRegistrationBreadcrumb } from '~/util/sentry'
 import WithInvoiceRegisterFunnelLayout from '../../components/funnels/WithInvoiceRegisterFunnelLayout'
@@ -37,6 +42,7 @@ type PersonalFormValues = {
 function RouteComponent() {
   const { data, isLoading } = useRegistrationQuery()
   const { saveDraftRegistration } = useDraftRegistration()
+  const updateMutation = useUpdateRegistrationMutation()
   const navigate = useNavigate()
   const t = useTranslations()
   const locale = useCurrentLocale()
@@ -53,7 +59,8 @@ function RouteComponent() {
     }
   }, [locale, t])
 
-  const personalInfo = data?.registration?.registrationInfo?.personalInfo
+  const registration = data?.registration
+  const personalInfo = registration?.registrationInfo?.personalInfo
 
   const presetPronouns = ['He/Him', 'She/Her', 'They/Them']
   const defaultPronounsSelection =
@@ -130,24 +137,34 @@ function RouteComponent() {
       languageCount: data.spokenLanguages?.length || 0,
       pronounsSet: Boolean(data.pronounsSelection),
     })
-    saveDraftRegistration((prev) => ({
-      ...prev,
-      personalInfo: {
-        nickname: sanitizeSingleLine(data.nickname ?? ''),
-        firstName: sanitizeSingleLine(data.firstName ?? ''),
-        lastName: sanitizeSingleLine(data.lastName ?? ''),
-        fullNamePermission: Boolean(data.fullNamePermission),
-        dateOfBirth: DateTime.fromISO(String(data.dateOfBirth ?? ''), { zone: 'Europe/Berlin' }),
-        spokenLanguages: data.spokenLanguages || [],
-        pronouns:
-          data.pronounsSelection === 'prefer-not-to-say'
-            ? 'prefer-not-to-say'
-            : data.pronounsSelection === 'other'
-              ? (data.pronounsOther ?? null)
-              : data.pronounsSelection,
-        wheelchair: Boolean(data.wheelchair),
-      },
-    }))
+    const updatedPersonalInfo = {
+      nickname: sanitizeSingleLine(data.nickname ?? ''),
+      firstName: sanitizeSingleLine(data.firstName ?? ''),
+      lastName: sanitizeSingleLine(data.lastName ?? ''),
+      fullNamePermission: Boolean(data.fullNamePermission),
+      dateOfBirth: DateTime.fromISO(String(data.dateOfBirth ?? ''), { zone: 'Europe/Berlin' }),
+      spokenLanguages: data.spokenLanguages || [],
+      pronouns:
+        data.pronounsSelection === 'prefer-not-to-say'
+          ? 'prefer-not-to-say'
+          : data.pronounsSelection === 'other'
+            ? (data.pronounsOther ?? null)
+            : data.pronounsSelection,
+      wheelchair: Boolean(data.wheelchair),
+    }
+
+    if (registration && isSubmitted(registration)) {
+      updateMutation.mutate(
+        {
+          id: registration.id,
+          registrationInfo: { ...registration.registrationInfo, personalInfo: updatedPersonalInfo },
+        },
+        { onSuccess: () => navigate({ href: '/register/summary' }) },
+      )
+      return
+    }
+
+    saveDraftRegistration((prev) => ({ ...prev, personalInfo: updatedPersonalInfo }))
 
     navigate({ href: '/register/contact' })
   }

@@ -181,7 +181,7 @@ const normalizeDate = (value: unknown): Date | null => {
 }
 
 // Parse DATETIME, DATETIME_RANGE placeholders, Fluent select expressions, and simple variable substitution
-const processDatePlaceholders = (
+export const processDatePlaceholders = (
   text: string,
   vars: Record<string, unknown>,
   locale: Locale,
@@ -224,24 +224,17 @@ const processDatePlaceholders = (
       const varValue = vars[varName]
       const valueStr = varValue === undefined || varValue === null ? '' : String(varValue)
 
-      // Simple parsing: split by [ and ] and extract key-value pairs
       const optionMap: Record<string, string> = {}
       let defaultText = ''
 
-      // Split by brackets and clean up
-      const bracketSplit = options.split(/[[\]]/).filter((s) => s.trim())
-
-      for (let i = 0; i < bracketSplit.length; i += 2) {
-        const key = bracketSplit[i]?.trim()
-        const value = bracketSplit[i + 1]?.trim()
-
-        if (key && value) {
-          if (key.startsWith('*')) {
-            // Default option (remove the * prefix)
-            defaultText = value
-          } else {
-            optionMap[key] = value
-          }
+      // Variants look like `*[key] text`, the star marks the default one.
+      for (const [, star, key, text] of options.matchAll(
+        /(\*?)\[([^\]]+)\]\s*([^[]*?)\s*(?=\*?\[|$)/g,
+      )) {
+        if (star) {
+          defaultText = text
+        } else {
+          optionMap[key] = text
         }
       }
 

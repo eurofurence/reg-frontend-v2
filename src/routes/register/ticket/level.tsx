@@ -5,8 +5,12 @@ import { useForm } from 'react-hook-form'
 import { RadioGroup, TicketLevelAddon, TicketLevelCard, TicketLevelFootnote } from '~/components'
 import { useTranslations } from '~/localization'
 import { determineDefaultAddons } from '~/registration/addons'
-import { useDraftRegistration, useRegistrationQuery } from '~/registration/hooks'
-import type { TicketLevelAddons } from '~/registration/types'
+import {
+  useDraftRegistration,
+  useRegistrationQuery,
+  useUpdateRegistrationMutation,
+} from '~/registration/hooks'
+import { isSubmitted, type TicketLevelAddons } from '~/registration/types'
 import FullWidthRegisterFunnelLayout from '../../../components/funnels/FullWidthRegisterFunnelLayout'
 import config from '../../../config'
 
@@ -43,10 +47,12 @@ export const Route = createFileRoute('/register/ticket/level')({
 function RouteComponent() {
   const { data, isLoading } = useRegistrationQuery()
   const { saveDraftRegistration } = useDraftRegistration()
+  const updateMutation = useUpdateRegistrationMutation()
   const navigate = useNavigate()
   const t = useTranslations()
 
-  const registrationInfo = data?.registration?.registrationInfo
+  const registration = data?.registration
+  const registrationInfo = registration?.registrationInfo
   const ticketType = registrationInfo?.ticketType
 
   // Convert config.ticketLevels object to array format for compatibility
@@ -235,13 +241,23 @@ function RouteComponent() {
       return
     }
 
-    saveDraftRegistration((prev) => ({
-      ...prev,
-      ticketLevel: {
-        level: formData.level,
-        addons: formData.addons as TicketLevelAddons,
-      },
-    }))
+    const ticketLevel = {
+      level: formData.level,
+      addons: formData.addons as TicketLevelAddons,
+    }
+
+    if (registration && isSubmitted(registration)) {
+      updateMutation.mutate(
+        {
+          id: registration.id,
+          registrationInfo: { ...registration.registrationInfo, ticketLevel },
+        },
+        { onSuccess: () => navigate({ href: '/register/summary' }) },
+      )
+      return
+    }
+
+    saveDraftRegistration((prev) => ({ ...prev, ticketLevel }))
     navigate({ href: '/register/personal-info' })
   }
 
