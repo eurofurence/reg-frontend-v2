@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
+import type { DateTime } from 'luxon'
 import { useEffect, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { RadioCard, RadioGroup } from '~/components'
@@ -7,6 +8,7 @@ import { useEurofurenceDates } from '~/hooks/useEurofurenceDates'
 import { useTranslations } from '~/localization'
 import { determineDefaultAddons } from '~/registration/addons'
 import { useDraftRegistration, useRegistrationQuery } from '~/registration/hooks'
+import type { RegistrationInfo } from '~/registration/types'
 import { addRegistrationBreadcrumb } from '~/util/sentry'
 import FullWidthRegisterFunnelLayout from '../../../components/funnels/FullWidthRegisterFunnelLayout'
 import dayTicketImage from '../../../images/con-cats/ticket-types/day.png'
@@ -28,6 +30,26 @@ const TicketTypeGrid = styled.div`
 const ConCat = styled.figure`
   position: relative;
 `
+
+// The other type has different hidden packages and defaults, so the level starts over. This also
+// runs on autosave, so by the time the page is submitted the draft usually holds the new type already.
+const withTicketType = (
+  prev: Partial<RegistrationInfo>,
+  type: 'full' | 'day',
+  conventionStart: DateTime,
+): Partial<RegistrationInfo> => ({
+  ...prev,
+  ...(prev.ticketLevel && prev.ticketType?.type !== type
+    ? { ticketLevel: { level: null, addons: determineDefaultAddons(type) } }
+    : {}),
+  ticketType:
+    type === 'day'
+      ? {
+          type: 'day',
+          day: prev.ticketType?.type === 'day' ? prev.ticketType.day : conventionStart,
+        }
+      : { type: 'full' },
+})
 
 export const Route = createFileRoute('/register/ticket/type')({
   component: RouteComponent,
@@ -57,21 +79,9 @@ function RouteComponent() {
   // Autosave when form values change
   useEffect(() => {
     const subscription = watch((formData) => {
-      if (formData.type && (formData.type === 'full' || formData.type === 'day')) {
-        const ticketType = formData.type as 'full' | 'day'
-        saveDraftRegistration((prev) => ({
-          ...prev,
-          ticketType:
-            ticketType === 'day'
-              ? {
-                  type: 'day' as const,
-                  day:
-                    prev.ticketType?.type === 'day' ? prev.ticketType.day : dates.conventionStart,
-                }
-              : {
-                  type: 'full' as const,
-                },
-        }))
+      if (formData.type === 'full' || formData.type === 'day') {
+        const type = formData.type
+        saveDraftRegistration((prev) => withTicketType(prev, type, dates.conventionStart))
       }
     })
 
@@ -88,42 +98,7 @@ function RouteComponent() {
 
   const onSubmit = (formData: { type: 'full' | 'day' }) => {
     addRegistrationBreadcrumb('ticket-type', 'selected', { ticketType: formData.type })
-    saveDraftRegistration((prev) => {
-      // The other type has different hidden packages and defaults, so the level starts over.
-      const resetLevel =
-        prev.ticketLevel && prev.ticketType?.type !== formData.type
-          ? {
-              ticketLevel: {
-                level: null,
-                addons: determineDefaultAddons(formData.type),
-              },
-            }
-          : {}
-
-      if (formData.type === 'day') {
-        const existingDay =
-          prev.ticketType?.type === 'day'
-            ? prev.ticketType.day
-            : currentTicketType?.type === 'day'
-              ? currentTicketType.day
-              : dates.conventionStart
-
-        return {
-          ...prev,
-          ...resetLevel,
-          ticketType: {
-            type: 'day',
-            day: existingDay ?? dates.conventionStart,
-          },
-        }
-      }
-
-      return {
-        ...prev,
-        ...resetLevel,
-        ticketType: { type: 'full' },
-      }
-    })
+    saveDraftRegistration((prev) => withTicketType(prev, formData.type, dates.conventionStart))
 
     if (formData.type === 'day') {
       navigate({ href: '/register/ticket/day' })

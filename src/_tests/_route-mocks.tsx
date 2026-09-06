@@ -1,8 +1,8 @@
 import { mock } from 'bun:test'
 import type { ReactNode } from 'react'
+import * as authsrv from '~/apis/authsrv'
 import config from '~/config'
 import * as localization from '~/localization'
-import * as autosave from '~/registration/autosave'
 import type { RegistrationInfo, RegistrationStatus } from '~/registration/types'
 
 export const registrationData: {
@@ -21,12 +21,14 @@ export const registrationData: {
 }
 
 export const navigations: string[] = []
+const navigate = (opts: { href: string }) => {
+  navigations.push(opts.href)
+}
 
 mock.module('@tanstack/react-router', () => ({
   createFileRoute: () => (opts: unknown) => opts,
-  useNavigate: () => (opts: { href: string }) => {
-    navigations.push(opts.href)
-  },
+  Link: ({ to, children }: { to: string; children: ReactNode }) => <a href={to}>{children}</a>,
+  useNavigate: () => navigate,
 }))
 
 export const savedDrafts: Partial<RegistrationInfo>[] = []
@@ -38,7 +40,11 @@ mock.module('~/registration/hooks', () => ({
     saveDraftRegistration: (
       update: (prev: Partial<RegistrationInfo>) => Partial<RegistrationInfo>,
     ) => {
-      savedDrafts.push(update(registrationData.registration.registrationInfo))
+      const next = update(registrationData.registration.registrationInfo)
+      savedDrafts.push(next)
+      if (registrationData.registration.status === 'unsubmitted') {
+        registrationData.registration.registrationInfo = next
+      }
     },
   }),
   useSubmitRegistrationMutation: () => ({ mutate: () => {} }),
@@ -55,11 +61,6 @@ mock.module('~/registration/hooks', () => ({
 
 // Module mocks leak into every file of a plain `bun test` run, so keep the real exports
 // around for the tests that exercise these modules directly.
-mock.module('~/registration/autosave', () => ({
-  ...autosave,
-  hasDraftRegistrationInfo: () => true,
-}))
-
 mock.module('~/localization', () => ({
   ...localization,
   useTranslations: () => (key: string) => key,
@@ -67,6 +68,7 @@ mock.module('~/localization', () => ({
 }))
 
 mock.module('~/apis/authsrv', () => ({
+  ...authsrv,
   useUserInfoQuery: () => ({ data: undefined }),
 }))
 

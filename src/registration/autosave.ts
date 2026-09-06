@@ -79,7 +79,7 @@ const deserializeTicketType = (
   if (!rawDay) {
     return {
       ...ticketType,
-      day: DateTime.fromISO('2025-09-03', { zone: 'Europe/Berlin' }),
+      day: config.dayTicketStartDate,
     }
   }
 
@@ -89,7 +89,7 @@ const deserializeTicketType = (
   if (!day?.isValid) {
     return {
       ...ticketType,
-      day: DateTime.fromISO('2025-08-13T10:00:00', { zone: 'Europe/Berlin' }),
+      day: config.dayTicketStartDate,
     }
   }
 

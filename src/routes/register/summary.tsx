@@ -1,14 +1,13 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { captureException } from '@sentry/react'
-import { createFileRoute, useNavigate } from '@tanstack/react-router'
+import { createFileRoute, Link, useNavigate } from '@tanstack/react-router'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import WithInvoiceRegisterFunnelLayout from '~/components/funnels/WithInvoiceRegisterFunnelLayout'
 import Checkbox from '~/components/ui/controls/forms/checkbox'
 import Form from '~/components/ui/layout/form'
 import { useCurrentLocale, useTranslations } from '~/localization'
-import { hasDraftRegistrationInfo } from '~/registration/autosave'
 import { useRegistrationQuery, useSubmitRegistrationMutation } from '~/registration/hooks'
 import type { RegistrationInfo, RegistrationStatus } from '~/registration/types'
 import { addRegistrationBreadcrumb } from '~/util/sentry'
@@ -119,9 +118,9 @@ const Section = ({
     <SectionContainer status={status}>
       <SectionTitle>{t(`register-summary-section-${sectionId}-title`)}</SectionTitle>
       {status === 'cancelled' ? undefined : (
-        <a href={editLink} style={{ gridArea: 'edit' }}>
+        <Link to={editLink} style={{ gridArea: 'edit' }}>
           {t('register-summary-edit')}
-        </a>
+        </Link>
       )}
       <PropertyList>
         {properties.map(({ id, value, wide = false }) => (
@@ -147,12 +146,19 @@ function RouteComponent() {
   const registration = data?.registration
   const info = registration?.registrationInfo
   const isEditMode = registration && registration.status !== 'unsubmitted'
+  const isComplete = Boolean(
+    info?.ticketType &&
+      info.ticketLevel &&
+      info.personalInfo &&
+      info.contactInfo &&
+      info.optionalInfo,
+  )
 
   useEffect(() => {
-    if (!isLoading && !hasDraftRegistrationInfo(info)) {
+    if (!isLoading && !isComplete) {
       navigate({ href: '/register/ticket/type' })
     }
-  }, [info, isLoading, navigate])
+  }, [isComplete, isLoading, navigate])
 
   const {
     handleSubmit,
@@ -172,6 +178,10 @@ function RouteComponent() {
 
   if (!registration) {
     return <div>{t('register-summary-no-draft-available')}</div>
+  }
+
+  if (!isComplete) {
+    return null
   }
 
   // Show registration regardless of status (draft or existing)
@@ -339,15 +349,30 @@ function RouteComponent() {
               })}
             >
               <span>
-                I accept the{' '}
-                <a target="_blank" rel="noreferrer noopener" href={config.websiteLinks.rules}>
-                  rules
-                </a>{' '}
-                and{' '}
-                <a target="_blank" rel="noreferrer noopener" href={config.websiteLinks.terms}>
-                  conditions
-                </a>
-                .
+                {t('register-summary-rules-and-conditions-accepted')
+                  .split(/(<rules>.*?<\/rules>|<conditions>.*?<\/conditions>)/)
+                  .map((part, index) => {
+                    const link = part.match(/^<(rules|conditions)>(.*)<\/\1>$/)
+
+                    if (!link) {
+                      return part
+                    }
+
+                    return (
+                      <a
+                        key={index}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        href={
+                          link[1] === 'rules'
+                            ? config.websiteLinks.rules
+                            : config.websiteLinks.terms
+                        }
+                      >
+                        {link[2]}
+                      </a>
+                    )
+                  })}
               </span>
             </Checkbox>
             {errors.rulesAndConditionsAccepted?.message && (

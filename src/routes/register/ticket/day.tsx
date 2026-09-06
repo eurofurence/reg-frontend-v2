@@ -1,13 +1,13 @@
 import styled from '@emotion/styled'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
-import { eachDayOfInterval } from 'date-fns'
-import { DateTime } from 'luxon'
+import { DateTime, Interval } from 'luxon'
 import { useEffect, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { RadioCard, RadioGroup } from '~/components'
-import { useEurofurenceDates } from '~/hooks/useEurofurenceDates'
+import config from '~/config'
 import { useTranslations } from '~/localization'
 import { useDraftRegistration, useRegistrationQuery } from '~/registration/hooks'
+import { eachDayOfInterval } from '~/util/dates'
 import FullWidthRegisterFunnelLayout from '../../../components/funnels/FullWidthRegisterFunnelLayout'
 import fridayImage from '../../../images/con-cats/days/friday.png'
 import mondayImage from '../../../images/con-cats/days/monday.png'
@@ -57,13 +57,10 @@ function RouteComponent() {
   const { saveDraftRegistration } = useDraftRegistration()
   const navigate = useNavigate()
   const t = useTranslations()
-  const { dates } = useEurofurenceDates()
 
-  // Use convention dates for day ticket range
-  const days = eachDayOfInterval({
-    start: dates.conventionStart.toJSDate(),
-    end: dates.conventionEnd.toJSDate(),
-  })
+  const days = eachDayOfInterval(
+    Interval.fromDateTimes(config.dayTicketStartDate, config.dayTicketEndDate),
+  )
 
   const registrationInfo = data?.registration?.registrationInfo
 
@@ -145,10 +142,9 @@ function RouteComponent() {
       <form id="ticket-day-form">
         <RadioGroup name="day">
           <Grid>
-            {days.map((d) => {
-              const value = d.toISOString().slice(0, 10)
-              const dateTime = DateTime.fromJSDate(d, { zone: 'Europe/Berlin' })
-              const label = t('register-ticket-day-card.label', { date: dateTime })
+            {days.map((day) => {
+              const value = day.toISODate()!
+              const label = t('register-ticket-day-card.label', { date: day })
 
               return (
                 <RadioCard
@@ -158,7 +154,7 @@ function RouteComponent() {
                   {...register('day', { required: true })}
                 >
                   <ConCat>
-                    <img src={dayImages[dateTime.weekday]} alt="" />
+                    <img src={dayImages[day.weekday]} alt="" />
                   </ConCat>
                 </RadioCard>
               )

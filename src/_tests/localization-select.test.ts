@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'bun:test'
+import { DateTime } from 'luxon'
 import { processDatePlaceholders } from '~/localization'
 import deDE from '~/localizations/de-DE.json'
 import enUS from '~/localizations/en-US.json'
@@ -43,5 +44,17 @@ describe('Fluent select expressions', () => {
     expect(processDatePlaceholders(sizeLabels, { value: 'S' }, 'en-US')).toBe('Small')
     expect(processDatePlaceholders(sizeLabels, { value: 'wS' }, 'en-US')).toBe('Small (Ladies Cut)')
     expect(processDatePlaceholders(sizeLabels, { value: 'nope' }, 'en-US')).toBe('Small')
+  })
+})
+
+describe('DATETIME placeholders', () => {
+  const template = '{DATETIME($date, day: "numeric", month: "long")}'
+
+  it('formats convention dates in the convention timezone', () => {
+    const date = DateTime.fromISO('2026-08-19', { zone: 'Europe/Berlin' })
+
+    expect(processDatePlaceholders(template, { date }, 'en-US')).toBe('August 19')
+    expect(processDatePlaceholders(template, { date: '2026-08-19' }, 'en-US')).toBe('August 19')
+    expect(processDatePlaceholders(template, { date }, 'de-DE')).toBe('19. August')
   })
 })

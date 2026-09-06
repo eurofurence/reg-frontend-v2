@@ -4,6 +4,7 @@
  */
 
 import styled from '@emotion/styled'
+import { Link } from '@tanstack/react-router'
 import { useState } from 'react'
 import Button from '~/components/ui/controls/button'
 import Spinner from '~/components/ui/controls/spinner'
@@ -118,7 +119,7 @@ const Invoice = ({
         <h1>{title}</h1>
         {editLink === undefined ? undefined : (
           <EditLink>
-            <a href={editLink}>Edit selection</a>
+            <Link to={editLink}>{t('invoice-edit-selection')}</Link>
           </EditLink>
         )}
       </header>

@@ -70,11 +70,11 @@ function RouteComponent() {
   }, [isLoading, navigate, data?.registration?.registrationInfo])
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <div>{t('common-loading')}</div>
   }
 
   if (data?.isOpen === false) {
-    return <div>Registration is not open yet.</div>
+    return <div>{t('register-not-open-yet-title')}</div>
   }
 
   const onSubmit = (values: OptionalFormValues) => {

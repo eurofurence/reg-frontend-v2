@@ -1,7 +1,26 @@
 import { useQueryClient } from '@tanstack/react-query'
-import { deserializeRegistrationInfo } from './autosave'
+import { deserializeRegistrationInfo, hasDraftRegistrationInfo } from './autosave'
 import { type RegistrationQueryResult, registrationQueryKey } from './query'
 import { isSubmitted, type RegistrationInfo } from './types'
+
+// Only a draft the same user left behind is picked up again. A registration that exists on the
+// server is never treated as a draft, it gets loaded fresh instead.
+export const readDraft = (
+  cached: RegistrationQueryResult | undefined,
+  subject: string | undefined,
+) => {
+  if (!cached?.registration || isSubmitted(cached.registration) || cached.subject !== subject) {
+    return null
+  }
+
+  const registrationInfo = deserializeRegistrationInfo(cached.registration.registrationInfo)
+
+  if (!registrationInfo || !hasDraftRegistrationInfo(registrationInfo)) {
+    return null
+  }
+
+  return { registrationInfo, lastSavedAt: cached.lastSavedAt }
+}
 
 export const useDraftRegistration = () => {
   const queryClient = useQueryClient()
@@ -20,6 +39,7 @@ export const useDraftRegistration = () => {
     const nextInfo = updater(previousInfo)
 
     queryClient.setQueryData<RegistrationQueryResult>(registrationQueryKey, {
+      ...cached,
       isOpen: true,
       registration: {
         status: 'unsubmitted',

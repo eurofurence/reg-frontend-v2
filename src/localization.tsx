@@ -129,7 +129,8 @@ const formatDate = (
     return ''
   }
 
-  return new Intl.DateTimeFormat(locale, options).format(date)
+  // Everything shown is a convention date, so it must not shift with the viewer's timezone.
+  return new Intl.DateTimeFormat(locale, { timeZone: 'Europe/Berlin', ...options }).format(date)
 }
 
 // Format date range using Intl.DateTimeFormat
@@ -146,7 +147,7 @@ const formatDateRange = (
     return ''
   }
 
-  const formatter = new Intl.DateTimeFormat(locale, options)
+  const formatter = new Intl.DateTimeFormat(locale, { timeZone: 'Europe/Berlin', ...options })
 
   if (typeof formatter.formatRange === 'function') {
     return formatter.formatRange(startDate, endDate)

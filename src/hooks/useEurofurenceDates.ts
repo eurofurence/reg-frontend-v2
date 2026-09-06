@@ -48,9 +48,6 @@ export const useEurofurenceDates = () => {
     gcTime: 1000 * 60 * 60 * 24, // 24 hours
     retry: 2,
     retryDelay: 1000,
-    // Use fallback dates as initial data
-    initialData: fallbackDates,
-    // Use fallback dates if query fails
     placeholderData: fallbackDates,
   })
 

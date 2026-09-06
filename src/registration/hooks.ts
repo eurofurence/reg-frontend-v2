@@ -6,6 +6,7 @@ import {
   submitRegistration,
   updateRegistration,
 } from '~/apis/attsrv'
+import { type UserInfo, userInfoQueryKey } from '~/apis/authsrv'
 import {
   calculateOutstandingDues,
   calculateTotalPaid,
@@ -16,7 +17,7 @@ import {
 } from '~/apis/paysrv'
 import { queryClient } from '~/queryClient'
 import { includes } from '~/util/includes'
-import { deserializeRegistrationInfo, hasDraftRegistrationInfo } from './autosave'
+import { readDraft } from './draft'
 import { type RegistrationQueryResult, registrationQueryKey } from './query'
 import type {
   ApprovedRegistration,
@@ -55,30 +56,20 @@ const mapApprovedRegistration = async (
   }
 }
 
-const getDraftRegistrationFromCache = () => {
-  const cached = queryClient.getQueryData<RegistrationQueryResult>(registrationQueryKey)
-  const normalizedInfo = deserializeRegistrationInfo(cached?.registration?.registrationInfo)
-
-  if (!hasDraftRegistrationInfo(normalizedInfo)) {
-    return null
-  }
-
-  return {
-    registrationInfo: normalizedInfo,
-    lastSavedAt: cached?.lastSavedAt,
-  }
-}
-
 const loadRegistrationState = async (): Promise<RegistrationQueryResult> => {
   try {
+    const subject = queryClient.getQueryData<UserInfo>(userInfoQueryKey)?.subject
     const countdown = await registrationCountdownCheck()
 
     if (countdown.countdown > 0) {
-      return { isOpen: false, countdown }
+      return { isOpen: false, countdown, subject }
     }
 
     const existing = await findExistingRegistration()
-    const draft = getDraftRegistrationFromCache()
+    const draft = readDraft(
+      queryClient.getQueryData<RegistrationQueryResult>(registrationQueryKey),
+      subject,
+    )
 
     // If user has existing submitted registration, load it (prevent duplicate registration)
     if (existing !== undefined) {
@@ -88,6 +79,7 @@ const loadRegistrationState = async (): Promise<RegistrationQueryResult> => {
       if (includes(['new', 'waiting'] as const, normalizedStatus)) {
         return {
           isOpen: true,
+          subject,
           registration: mapPendingRegistration(
             existing.id,
             normalizedStatus as PendingRegistration['status'],
@@ -104,6 +96,7 @@ const loadRegistrationState = async (): Promise<RegistrationQueryResult> => {
       ) {
         return {
           isOpen: true,
+          subject,
           registration: await mapApprovedRegistration(
             existing.id,
             normalizedStatus as ApprovedRegistration['status'],
@@ -114,9 +107,10 @@ const loadRegistrationState = async (): Promise<RegistrationQueryResult> => {
     }
 
     // If user has draft data, allow continuing draft (only if no existing registration)
-    if (draft?.registrationInfo && Object.keys(draft.registrationInfo).length > 0) {
+    if (draft) {
       return {
         isOpen: true,
+        subject,
         registration: {
           status: 'unsubmitted',
           registrationInfo: draft.registrationInfo,
@@ -129,6 +123,7 @@ const loadRegistrationState = async (): Promise<RegistrationQueryResult> => {
     if (existing === undefined) {
       return {
         isOpen: true,
+        subject,
         registration: {
           status: 'unsubmitted',
           registrationInfo: {},
@@ -139,6 +134,7 @@ const loadRegistrationState = async (): Promise<RegistrationQueryResult> => {
     // Fallback - shouldn't reach here
     return {
       isOpen: true,
+      subject,
       registration: {
         status: 'unsubmitted',
         registrationInfo: {},

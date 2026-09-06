@@ -6,6 +6,7 @@ import type { ReactNode } from 'react'
 import { languageCodes } from '~/data/languages'
 import deDE from '~/localizations/de-DE.json'
 import enUS from '~/localizations/en-US.json'
+import { determineDefaultAddons } from '~/registration/addons'
 import { loadRouteComponent, registrationData } from './_route-mocks'
 
 let Summary: () => ReactNode
@@ -20,6 +21,8 @@ beforeAll(async () => {
 
 beforeEach(() => {
   registrationData.registration.registrationInfo = {
+    ticketType: { type: 'full' },
+    ticketLevel: { level: 'standard', addons: determineDefaultAddons('full') },
     personalInfo: {
       nickname: 'Johnny',
       firstName: 'John',

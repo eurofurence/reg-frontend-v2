@@ -12,9 +12,9 @@ interface LoginGuardProps {
 
 const LoginGuard = ({ children }: LoginGuardProps) => {
   const t = useTranslations()
-  const { data, error, status, refetch, isFetching } = useUserInfoQuery()
+  const { data, error, status, refetch } = useUserInfoQuery()
 
-  if (status === 'pending' || isFetching) {
+  if (status === 'pending') {
     return <div style={{ padding: '2rem', textAlign: 'center' }}>Loading…</div>
   }
 

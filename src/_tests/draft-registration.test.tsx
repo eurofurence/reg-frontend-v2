@@ -3,8 +3,10 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { renderHook } from '@testing-library/react'
 import { DateTime } from 'luxon'
 import type { ReactNode } from 'react'
+import config from '~/config'
 import { determineDefaultAddons } from '~/registration/addons'
-import { useDraftRegistration } from '~/registration/draft'
+import { deserializeRegistrationInfo } from '~/registration/autosave'
+import { readDraft, useDraftRegistration } from '~/registration/draft'
 import { type RegistrationQueryResult, registrationQueryKey } from '~/registration/query'
 import type { RegistrationInfo } from '~/registration/types'
 
@@ -55,18 +57,20 @@ const renderDraftHook = (state: RegistrationQueryResult) => {
 }
 
 describe('saveDraftRegistration', () => {
-  it('updates an unsubmitted draft', () => {
+  it('updates an unsubmitted draft and keeps it tied to the user', () => {
     const { saveDraftRegistration, getState } = renderDraftHook({
       isOpen: true,
+      subject: 'user-1',
       registration: { status: 'unsubmitted', registrationInfo: { ticketType: { type: 'full' } } },
     })
 
     saveDraftRegistration((prev) => ({ ...prev, personalInfo: registrationInfo.personalInfo }))
 
-    const registration = getState()?.registration
-    expect(registration?.status).toBe('unsubmitted')
-    expect(registration?.registrationInfo.ticketType).toEqual({ type: 'full' })
-    expect(registration?.registrationInfo.personalInfo?.nickname).toBe('Johnny')
+    const state = getState()
+    expect(state?.subject).toBe('user-1')
+    expect(state?.registration?.status).toBe('unsubmitted')
+    expect(state?.registration?.registrationInfo.ticketType).toEqual({ type: 'full' })
+    expect(state?.registration?.registrationInfo.personalInfo?.nickname).toBe('Johnny')
   })
 
   it('leaves a registration that exists on the server untouched', () => {
@@ -82,5 +86,63 @@ describe('saveDraftRegistration', () => {
     }))
 
     expect(getState()).toBe(submitted)
+  })
+})
+
+describe('readDraft', () => {
+  const draft: RegistrationQueryResult = {
+    isOpen: true,
+    subject: 'user-1',
+    registration: { status: 'unsubmitted', registrationInfo },
+    lastSavedAt: '2026-09-06T10:00:00.000Z',
+  }
+
+  it('returns the draft of the same user', () => {
+    const result = readDraft(draft, 'user-1')
+
+    expect(result?.registrationInfo.personalInfo?.nickname).toBe('Johnny')
+    expect(result?.lastSavedAt).toBe('2026-09-06T10:00:00.000Z')
+  })
+
+  it('ignores a draft left behind by another user', () => {
+    expect(readDraft(draft, 'user-2')).toBeNull()
+  })
+
+  it('never turns a registration that exists on the server into a draft', () => {
+    expect(
+      readDraft(
+        {
+          isOpen: true,
+          subject: 'user-1',
+          registration: { id: 42, status: 'new', registrationInfo },
+        },
+        'user-1',
+      ),
+    ).toBeNull()
+  })
+
+  it('ignores an empty draft', () => {
+    expect(
+      readDraft(
+        {
+          isOpen: true,
+          subject: 'user-1',
+          registration: { status: 'unsubmitted', registrationInfo: {} },
+        },
+        'user-1',
+      ),
+    ).toBeNull()
+    expect(readDraft(undefined, 'user-1')).toBeNull()
+  })
+})
+
+describe('deserializeRegistrationInfo', () => {
+  it('falls back to the first day ticket day when a day ticket has no day', () => {
+    const info = deserializeRegistrationInfo({ ticketType: { type: 'day' } } as any)
+
+    expect(info?.ticketType?.type).toBe('day')
+    expect(info?.ticketType?.type === 'day' && info.ticketType.day.toISODate()).toBe(
+      config.dayTicketStartDate.toISODate(),
+    )
   })
 })

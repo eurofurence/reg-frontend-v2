@@ -128,11 +128,11 @@ function RouteComponent() {
   }, [locale, t])
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <div>{t('common-loading')}</div>
   }
 
   if (registrationData?.isOpen === false) {
-    return <div>Registration is not open yet.</div>
+    return <div>{t('register-not-open-yet-title')}</div>
   }
 
   const onSubmit = (data: ContactFormValues) => {
