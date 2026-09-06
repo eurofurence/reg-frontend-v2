@@ -25,6 +25,9 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 # Maintenance page served when NGINX_CONF_MAINTENANCE is set
 COPY docker/maintenance.html /usr/share/nginx/html/maintenance.html
 
+# Offline page served when NGINX_CONF_MAINTENANCE is set
+COPY docker/offline.html /usr/share/nginx/html/offline.html
+
 # Nginx config is rendered at container start so env vars take effect at runtime
 COPY docker/nginx.conf /etc/nginx/templates/default.conf.template
 COPY docker/docker-entrypoint.sh /docker-entrypoint.sh
