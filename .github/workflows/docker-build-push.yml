@@ -1,5 +1,12 @@
 name: Create and publish Docker image
 
+# GitHub decided to disable this workflow after 6 weeks of inactivity,
+# which means **it also won't run on a merge to main**. So I needed to
+# make a comment change.
+#
+# Note to self: after periods of inactivity, first click through all
+# repos with build schedules, and enable the actions again or it won't
+# build containers on merge.
 on:
   push:
     branches:
