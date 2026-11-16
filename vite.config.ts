@@ -7,6 +7,8 @@ import { defineConfig } from 'vite'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [tanstackRouter({ autoCodeSplitting: true }), viteReact(), tailwindcss()],
+  // Set by the Dockerfile; unset locally, which keeps the default '/'
+  base: process.env.BASE_PATH,
   build: {
     rollupOptions: {
       output: {

@@ -31,6 +31,7 @@ let router: ReturnType<typeof createRouter>
 try {
   router = createRouter({
     routeTree,
+    basepath: import.meta.env.BASE_URL,
     context: {},
     defaultPreload: 'intent',
     scrollRestoration: true,

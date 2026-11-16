@@ -13,6 +13,9 @@ RUN bun install --frozen-lockfile
 # Copy source code
 COPY . .
 
+# The real prefix is only known at runtime; nginx replaces this token with NGINX_CONF_PATH_PREFIX
+ENV VITE_API_BASE_URL=/__PATH_PREFIX__
+ENV BASE_PATH=/__PATH_PREFIX__/app/
 # Build the application
 RUN bun run build
 
@@ -20,7 +23,7 @@ RUN bun run build
 FROM nginx:alpine AS runner
 
 # Copy built application from builder stage
-COPY --from=builder /app/dist /usr/share/nginx/html
+COPY --from=builder /app/dist /usr/share/nginx/html/app
 
 # Maintenance page served when NGINX_CONF_MAINTENANCE is set
 COPY docker/maintenance.html /usr/share/nginx/html/maintenance.html
