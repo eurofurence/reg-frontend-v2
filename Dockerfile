@@ -37,8 +37,7 @@ COPY docker/docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 
 # Ensure nginx user owns required directories (nginx user already exists in nginx:alpine)
-RUN mkdir -p /var/cache/nginx/proxy && \
-    chown -R nginx:nginx /usr/share/nginx/html && \
+RUN chown -R nginx:nginx /usr/share/nginx/html && \
     chown -R nginx:nginx /var/cache/nginx && \
     chown -R nginx:nginx /var/log/nginx && \
     chown -R nginx:nginx /etc/nginx/conf.d && \
